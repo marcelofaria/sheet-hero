@@ -10,32 +10,30 @@ import time                     #calcula o tempo das notas
 #------------------- DECLARAÇÃO DE VARIÁVEIS -------------------#
 
 #quadros por buffer
-CHUNK = 1024 * 6
-
+#quanto maior o multiplicador, maior a precisão da captação da nota
+#porém, diminui a precisão do tempo da nota por perder performance
+CHUNK    = 1024 * 8
 #quantidade de bytes por amostra
-FORMAT = pyaudio.paInt16
-
+FORMAT   = pyaudio.paInt16
 #mono ou estéreo
 CHANNELS = 1
-
 #quantidade de amostras captadas por segundo (qualidade do áudio)
-RATE = 44100
+RATE     = 44100
 
-#criacao da figura MATPLOTLIB e dois eixos matplotlib
+#criacao da figura e dois eixos matplotlib
 fig, (ax, ax2) = plt.subplots(2, figsize=(10,8))
 
-#instancia da classe pyaudio
+#instância da classe pyaudio
 p = pyaudio.PyAudio()
 
-#captura de dados do microfone
+#captura dados do microfone
 stream = p.open(
     format = FORMAT,
     channels = CHANNELS,
     rate = RATE,
     input = True,
     output = True,
-    frames_per_buffer = CHUNK
-)
+    frames_per_buffer = CHUNK)
 
 #variaveis para plotar
 x = np.arange(0, 2 * CHUNK, 2)
@@ -43,35 +41,39 @@ x_fft = np.linspace(0, RATE, CHUNK)
 
 #objeto com dados aleatórios
 line, = ax.plot(x, np.random.randn(CHUNK), '-', lw=2)
-
 #line_fft, = ax2.semilogx(x_fft, np.random.randn(CHUNK), '-', lw=2)
 line_fft, = ax2.plot(x_fft, np.random.randn(CHUNK), '-', lw=2)
 
 #formatacao dos eixos
+#--- Ondas Sonoras ---#
 ax.set_title('Ondas Sonoras')
-ax.set_ylim(0, 255)
-ax.set_xlim(0, CHUNK)
+ax.set_ylim(0, 255)   #limite do eixo y
+ax.set_xlim(0, CHUNK) #limite do eixo x
 plt.setp(ax, xticks=[0, CHUNK, 2 * CHUNK], yticks=[0,128,255])
-
+#---   Espectro   ---#
 ax2.set_title('Espectro')
-ax2.set_ylim(0, 0.85)
-ax2.set_xlim(0, 1600)
+ax2.set_ylim(0, 0.85) #limite do eixo y
+ax2.set_xlim(0, 1600) #limite do eixo x
 #plt.setp(ax2, xticks=[500, 1000, 2000, 3000, 4000])
 #ax2.set_xlim(20, RATE/2)
 
+#exibe a interface gráfica do MATPLOTLIB
+thismanager = plt.get_current_fig_manager()
+thismanager.window.state('zoomed')
 
 plt.show(block=False)
-note = ''
-previous_note = '1'
-time_start = 0
-
+#plt.summer()
+#utilitários para o loop
+note = ''           #declaração inicial <> vazio
+previous_note = '1' #declaração inicial <> vazio
+time_start = 0      #declaração inicial = 0 para contabilizar o tempo da nota
 
 #------------------- DECLARAÇÃO DE VARIÁVEIS -------------------#
 
 #-------------------     LOOP PRINCIPAL      -------------------#
 
 while True:
-    #dados binarios
+    #retorna o tamanho em bytes da amostra captada
     data = stream.read(CHUNK)
 
     #converte o dado para inteiro
@@ -101,11 +103,8 @@ while True:
             espectroVars = str(espectroVars) + "," + str(i)
         countI = countI + 1
     #
-
     splited = espectroVars
-
     splited = splited.split(",")
-
     splited = [float(y) for y in splited]
 
     even = 0
@@ -120,6 +119,7 @@ while True:
         x = x + 2
 
     splitedX = even.split(",")
+
     #tira o primeiro item adicionado pela atribuição inicial
     del splitedX[0]
 
@@ -129,6 +129,7 @@ while True:
         y = y + 2
 
     splitedY = odd.split(",")
+
     #tira o primeiro item adicionado pela atribuição inicial
     del splitedY[0]
 
@@ -140,6 +141,7 @@ while True:
     maxX = 0
     i = 0
 
+    #retorna em maxX e maxY as coordenadas do pico da onda
     while i < len(splitedY):
         if splitedY[i] > maxY:
             maxY = splitedY[i]
@@ -148,9 +150,9 @@ while True:
 
     #--- PRINTA O PICO DO ESPECTRO ---#
 
-    #plt.plot(splitedX[maxX], maxY, '*', lw=1)
-    #ax2.plot(splitedX[maxX], maxY, 'ro', lw=1)
-    #ax2.annotate('*', xy=(splitedX[maxX], maxY))
+    #ann, = plt.plot(splitedX[maxX], maxY, '*', lw = 1)
+    ann, = ax2.plot(splitedX[maxX], maxY, 'ro', lw = 1)
+    #ann = ax2.annotate('*', xy=(splitedX[maxX] - 7 , maxY - 0.01 ))
 
     #--- IMPRIME O NOME E O SÍMBOLO DA NOTA TOCADA ---#
     note = rules.define_note(splitedX[maxX])
@@ -161,19 +163,19 @@ while True:
     else:
         time_elapsed = time.time()
         total_time = time_elapsed - time_start
-        if(total_time > 0.19):
+        if(total_time > 0.19 and total_time < 64):
             note_symbol = rules.note_figure(float(total_time))
-            print(note, time_elapsed - time_start)
+            print(note, "%.2f" % (time_elapsed - time_start))
             print(note_symbol)
         time_start = time_elapsed
 
     previous_note = note
 
-
     #atualiza figura
     try:
         fig.canvas.draw()
         fig.canvas.flush_events()
+        ann.remove() #apaga a anotação do pico da onda
     except TclError:
         break
 
