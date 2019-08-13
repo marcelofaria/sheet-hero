@@ -1,11 +1,13 @@
-import pyaudio
-import struct
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.fftpack import fft
-from tkinter import TclError
-import rules
-import time
+import pyaudio                  #auxilia na captação do áudio
+import struct                   #converte os dados binarios captados do microfone
+import numpy as np              #faz cálculos com as entradas do microfone
+import matplotlib.pyplot as plt #plota gráficos
+from scipy.fftpack import fft   #calculos com fast fourier transform
+from tkinter import TclError    #trabalha com exceptions
+import rules                    #meu módulo de funções utilitárias
+import time                     #calcula o tempo das notas
+
+#------------------- DECLARAÇÃO DE VARIÁVEIS -------------------#
 
 #quadros por buffer
 CHUNK = 1024 * 6
@@ -19,7 +21,7 @@ CHANNELS = 1
 #quantidade de amostras captadas por segundo (qualidade do áudio)
 RATE = 44100
 
-#criacao da figura e dois eixos matplotlib
+#criacao da figura MATPLOTLIB e dois eixos matplotlib
 fig, (ax, ax2) = plt.subplots(2, figsize=(10,8))
 
 #instancia da classe pyaudio
@@ -27,12 +29,12 @@ p = pyaudio.PyAudio()
 
 #captura de dados do microfone
 stream = p.open(
-    format=FORMAT,
-    channels=CHANNELS,
-    rate=RATE,
-    input=True,
-    output=True,
-    frames_per_buffer=CHUNK
+    format = FORMAT,
+    channels = CHANNELS,
+    rate = RATE,
+    input = True,
+    output = True,
+    frames_per_buffer = CHUNK
 )
 
 #variaveis para plotar
@@ -57,10 +59,17 @@ ax2.set_xlim(0, 1600)
 #plt.setp(ax2, xticks=[500, 1000, 2000, 3000, 4000])
 #ax2.set_xlim(20, RATE/2)
 
+
 plt.show(block=False)
 note = ''
 previous_note = '1'
 time_start = 0
+
+
+#------------------- DECLARAÇÃO DE VARIÁVEIS -------------------#
+
+#-------------------     LOOP PRINCIPAL      -------------------#
+
 while True:
     #dados binarios
     data = stream.read(CHUNK)
@@ -82,7 +91,7 @@ while True:
     y_data = line_fft.get_ydata(orig=False)
     xy_data = line_fft.get_xydata()
 
-    #printa as coordenadas do espectro
+    #--- CALCULA O PICO DO ESPECTRO ---#
 
     espectroVars = 0
     countI = 0
@@ -137,27 +146,29 @@ while True:
             maxX = i
         i = i + 1
 
-    """
-    plt.plot(splitedX[maxX], maxY, '*', lw=1)
+    #--- PRINTA O PICO DO ESPECTRO ---#
 
-    ann = ax2.annotate('*', xy=(splitedX[maxX], maxY))
-    ax2.annotate('*', xy=(splitedX[maxX], maxY))
-    ann.remove()
-    """
+    #plt.plot(splitedX[maxX], maxY, '*', lw=1)
+    #ax2.plot(splitedX[maxX], maxY, 'ro', lw=1)
+    #ax2.annotate('*', xy=(splitedX[maxX], maxY))
+
+    #--- IMPRIME O NOME E O SÍMBOLO DA NOTA TOCADA ---#
     note = rules.define_note(splitedX[maxX])
+
     if(note == previous_note):
         #print(note + ' ' + previous_note)
         pass
     else:
         time_elapsed = time.time()
-        if(time_elapsed - time_start > 0.45):
+        total_time = time_elapsed - time_start
+        if(total_time > 0.19):
+            note_symbol = rules.note_figure(float(total_time))
             print(note, time_elapsed - time_start)
+            print(note_symbol)
         time_start = time_elapsed
 
     previous_note = note
 
-
-    #ax2.plot(splitedX[maxX], maxY, 'ro', lw=1)
 
     #atualiza figura
     try:
@@ -166,3 +177,4 @@ while True:
     except TclError:
         break
 
+#-------------------     LOOP PRINCIPAL      -------------------#

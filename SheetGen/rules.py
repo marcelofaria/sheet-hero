@@ -107,4 +107,25 @@ def define_note(frequency_hz):
     else:
         return ('Fora do limite')
 
+def note_figure(time_elapsed):
+    if (time_elapsed >= 3.8 and time_elapsed <= 4.2):
+        return ('SEMIBREVE 𝅝 4 tempos')
+    elif (time_elapsed >= 2.8 and time_elapsed <= 3.2):
+        return ('MINIMA. 𝅗𝅥. 3 tempos')
+    elif (time_elapsed >= 1.8 and time_elapsed <= 2.2):
+        return ('MINIMA 𝅗𝅥 2 tempos')
+    elif (time_elapsed >= 1.3 and time_elapsed <= 1.7):
+        return ('SEMINIMA. ♩. 1.5 tempos')
+    elif (time_elapsed >= 0.8 and time_elapsed <= 1.2):
+        return ('SEMINIMA ♩ 1 tempo')
+    elif (time_elapsed >= 0.71 and time_elapsed <= 0.79):
+        return ('COLCHEIA. 𝅘𝅥𝅮. 0.75 tempo')
+    elif (time_elapsed >= 0.3 and time_elapsed <= 0.7):
+        return ('COLCHEIA 𝅘𝅥𝅮 0.5 tempo')
+    elif (time_elapsed >= 0.2 and time_elapsed <= 0.29):
+        return ('SEMICOLCHEIA 𝅘𝅥𝅯 0.25 tempo')
+
+    else:
+        return('Fora do tempo')
+
 
