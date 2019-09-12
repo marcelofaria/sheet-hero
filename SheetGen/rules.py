@@ -1,4 +1,5 @@
 def define_note(frequency_hz):
+    #usar BUSCA BINARIA
     if(frequency_hz > 93.0 and frequency_hz < 101.0):
         return ('Sol2')
     elif(frequency_hz > 101.1 and frequency_hz < 107.0):

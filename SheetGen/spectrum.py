@@ -4,7 +4,8 @@ import numpy as np              #faz cálculos com as entradas do microfone
 import matplotlib.pyplot as plt #plota gráficos
 from scipy.fftpack import fft   #calculos com fast fourier transform
 from tkinter import TclError    #trabalha com exceptions
-import rules                    #meu módulo de funções utilitárias
+import rules                    #meu módulo para definir notas e tempos
+import sheet_draw               #meu módulo para desenhar a partitura
 import time                     #calcula o tempo das notas
 
 #------------------- DECLARAÇÃO DE VARIÁVEIS -------------------#
