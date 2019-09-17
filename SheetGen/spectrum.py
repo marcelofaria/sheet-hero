@@ -5,29 +5,29 @@ import matplotlib.pyplot as plt #plota gráficos
 from scipy.fftpack import fft   #calculos com fast fourier transform
 from tkinter import TclError    #trabalha com exceptions
 import rules                    #meu módulo para definir notas e tempos
-import sheet_draw               #meu módulo para desenhar a partitura
+import sheet_draw as sd         #meu módulo para imprimir a partitura
 import time                     #calcula o tempo das notas
 
-#------------------- DECLARAÇÃO DE VARIÁVEIS -------------------#
+#------------------- VARIABLES DECLARATION -------------------#
 
-#quadros por buffer
-#quanto maior o multiplicador, maior a precisão da captação da nota
-#porém, diminui a precisão do tempo da nota por perder performance
-CHUNK    = 1024 * 8
-#quantidade de bytes por amostra
+#frames per buffer
+#the bigger the multiplier, the bigger the note grasp accuracy
+#however, for reason of this performance loss, the note time accuracy decreases
+CHUNK    = 1024 * 10
+#quantity of bytes per sample
 FORMAT   = pyaudio.paInt16
-#mono ou estéreo
+#mono or estereo
 CHANNELS = 1
-#quantidade de amostras captadas por segundo (qualidade do áudio)
+#quantity of samples grasp per second(audio quality)
 RATE     = 44100
 
-#criacao da figura e dois eixos matplotlib
+#two axis matplotlib and figure creation
 fig, (ax, ax2) = plt.subplots(2, figsize=(10,8))
 
-#instância da classe pyaudio
+#pyaudio class instance
 p = pyaudio.PyAudio()
 
-#captura dados do microfone
+#catches data of microphone
 stream = p.open(
     format = FORMAT,
     channels = CHANNELS,
@@ -36,42 +36,45 @@ stream = p.open(
     output = True,
     frames_per_buffer = CHUNK)
 
-#variaveis para plotar
+#variables to plot
 x = np.arange(0, 2 * CHUNK, 2)
 x_fft = np.linspace(0, RATE, CHUNK)
 
-#objeto com dados aleatórios
+#random data object
 line, = ax.plot(x, np.random.randn(CHUNK), '-', lw=2)
 #line_fft, = ax2.semilogx(x_fft, np.random.randn(CHUNK), '-', lw=2)
 line_fft, = ax2.plot(x_fft, np.random.randn(CHUNK), '-', lw=2)
 
-#formatacao dos eixos
-#--- Ondas Sonoras ---#
+#axis formatting
+#--- Sound Waves ---#
 ax.set_title('Ondas Sonoras')
 ax.set_ylim(0, 255)   #limite do eixo y
 ax.set_xlim(0, CHUNK) #limite do eixo x
 plt.setp(ax, xticks=[0, CHUNK, 2 * CHUNK], yticks=[0,128,255])
-#---   Espectro   ---#
+#---   Spectrum   ---#
 ax2.set_title('Espectro')
 ax2.set_ylim(0, 0.85) #limite do eixo y
 ax2.set_xlim(0, 1600) #limite do eixo x
 #plt.setp(ax2, xticks=[500, 1000, 2000, 3000, 4000])
 #ax2.set_xlim(20, RATE/2)
 
-#exibe a interface gráfica do MATPLOTLIB
+#shows the user interface of MATPLOTLIB
 thismanager = plt.get_current_fig_manager()
 thismanager.window.state('zoomed')
 
 plt.show(block=False)
 #plt.summer()
-#utilitários para o loop
-note = ''           #declaração inicial <> vazio
-previous_note = '1' #declaração inicial <> vazio
-time_start = 0      #declaração inicial = 0 para contabilizar o tempo da nota
+#loop utilities
+note          = ''          #initial declaration <> empty
+previous_note = '1'         #initial declaration <> empty
+time_start    = 0           #initial declaration = 0 to count the time of the note
+movement      = 75         #fluidity test
+note_x        = 0           #
+note_y        = 0           #
 
-#------------------- DECLARAÇÃO DE VARIÁVEIS -------------------#
+#------------------- VARIABLES DECLARATION -------------------#
 
-#-------------------     LOOP PRINCIPAL      -------------------#
+#-------------------     MAIN LOOP      -------------------#
 
 while True:
     #retorna o tamanho em bytes da amostra captada
@@ -165,19 +168,26 @@ while True:
         time_elapsed = time.time()
         total_time = time_elapsed - time_start
         if(total_time > 0.19 and total_time < 64):
-            note_symbol = rules.note_figure(float(total_time))
+            position_y_sheet = rules.return_position_y(note)
+            note_symbol = rules.note_figure(float(total_time), movement , position_y_sheet, 0.05)
+            if(note_symbol != 'Fora do tempo'):
+                movement += 20
             print(note, "%.2f" % (time_elapsed - time_start))
             print(note_symbol)
         time_start = time_elapsed
 
     previous_note = note
 
-    #atualiza figura
+    sd.draw_sheet()
+
+    #movement += movement
+
+    #updates the figure
     try:
         fig.canvas.draw()
         fig.canvas.flush_events()
-        ann.remove() #apaga a anotação do pico da onda
+        ann.remove() #erases the wave peak annotation
     except TclError:
         break
 
-#-------------------     LOOP PRINCIPAL      -------------------#
+#-------------------     MAIN LOOP      -------------------#

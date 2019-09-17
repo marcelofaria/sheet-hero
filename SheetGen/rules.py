@@ -1,3 +1,13 @@
+import sheet_draw as sd         #meu módulo para imprimir a partitura
+
+semibreve     = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\semibreve.png'      #path
+minima        = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\minima.png'         #path
+seminima      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\seminima.png'       #path
+colcheia      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\colcheia.png'       #path
+semicolcheia  = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\semicolcheia.png'   #path
+fusa          = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\fusa.png'           #path
+semifusa      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\semifusa.png'       #path
+
 def define_note(frequency_hz):
     #usar BUSCA BINARIA
     if(frequency_hz > 93.0 and frequency_hz < 101.0):
@@ -108,25 +118,53 @@ def define_note(frequency_hz):
     else:
         return ('Fora do limite')
 
-def note_figure(time_elapsed):
+def note_figure(time_elapsed, x, y, resize_multiplier):
     if (time_elapsed >= 3.8 and time_elapsed <= 4.2):
+        sd.draw_note_figure(colcheia, x, y, False, resize_multiplier)
         return ('SEMIBREVE 𝅝 4 tempos')
     elif (time_elapsed >= 2.8 and time_elapsed <= 3.2):
+        sd.draw_note_figure(colcheia, x, y, False, resize_multiplier)
         return ('MINIMA. 𝅗𝅥. 3 tempos')
     elif (time_elapsed >= 1.8 and time_elapsed <= 2.2):
+        sd.draw_note_figure(colcheia, x, y, False, resize_multiplier)
         return ('MINIMA 𝅗𝅥 2 tempos')
     elif (time_elapsed >= 1.3 and time_elapsed <= 1.7):
+        sd.draw_note_figure(colcheia, x, y, False, resize_multiplier)
         return ('SEMINIMA. ♩. 1.5 tempos')
     elif (time_elapsed >= 0.8 and time_elapsed <= 1.2):
+        sd.draw_note_figure(colcheia, x, y, False, resize_multiplier)
         return ('SEMINIMA ♩ 1 tempo')
     elif (time_elapsed >= 0.71 and time_elapsed <= 0.79):
+        sd.draw_note_figure(colcheia, x, y, False, resize_multiplier)
         return ('COLCHEIA. 𝅘𝅥𝅮. 0.75 tempo')
     elif (time_elapsed >= 0.3 and time_elapsed <= 0.7):
+        sd.draw_note_figure(colcheia, x, y, False, resize_multiplier)
         return ('COLCHEIA 𝅘𝅥𝅮 0.5 tempo')
     elif (time_elapsed >= 0.2 and time_elapsed <= 0.29):
+        sd.draw_note_figure(colcheia, x, y, False, resize_multiplier)
         return ('SEMICOLCHEIA 𝅘𝅥𝅯 0.25 tempo')
 
     else:
         return('Fora do tempo')
 
-
+def return_position_y(note):
+    if(note   == 'Mi5'):
+        return -8.5
+    elif(note == 'Ré5'):
+        return -1.5
+    elif(note == 'Dó5'):
+        return 7.5
+    elif(note == 'Si4'):
+        return 14.5
+    elif(note == 'Lá4'):
+        return 22.5
+    elif(note == 'Sol4'):
+        return 29.5
+    elif(note == 'Fá4'):
+        return 37.5
+    elif(note == 'Mi4'):
+        return 44.5
+    elif(note == 'Ré4'):
+        return 52.5
+    else:
+        return -100

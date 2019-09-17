@@ -1,40 +1,51 @@
-import pygame as pyg
 import os
-from win32api import GetSystemMetrics
-
-
-def draw_note(note, x, y):
-    note_figure = pyg.image.load(os.path.join('data', note))
-    note_figure = pyg.transform.rotozoom(note_figure, 0,0.185)
-
-    screen.blit(note_figure, (x,y))
+import pygame as pyg
+#from win32api import GetSystemMetrics
 
 #(width, height) = (int(GetSystemMetrics(0)), int(GetSystemMetrics(1)))
 (width, height) = (900,600)
-screen = pyg.display.set_mode((width, height))
+screen = pyg.display.set_mode((width, height), pyg.RESIZABLE)
 screen.fill((255,255,225))
 pyg.display.set_caption('Sheet Gen')
 pyg.display.set_icon(screen)
+pyg.display.init()
 
-i = 0
-running = True
+def config_clef_armor(quantity, key_signature):
+    print('sorry, it does\'nt was implemented yet :(')
 
-#def draw_sheet():
-while running:
+def draw_note_figure(note_figure, position_x, position_y, increase_point, resize_multiplier):
+    #annotate the new note played
+    note_figure = pyg.image.load(os.path.join('data', note_figure))
+    note_figure = pyg.transform.rotozoom(note_figure, 0, resize_multiplier)
+    screen.blit(note_figure, (position_x, position_y))
+    #annotate the new note played
+
+    #TEM QUE ARRUMAR ESSA BAGAÇA AQUI!
+    if increase_point:
+        #annotate increase point
+        note_figure = pyg.image.load(os.path.join('data', note_figure))
+        note_figure = pyg.transform.rotozoom(note_figure, 0, 0.0185)
+        screen.blit(note_figure, (position_x, position_y))
+        #annotate increase point
+    #update image
+    pyg.display.flip()
+
+def draw_sheet():
+#while running:
+    #screen.fill((255,255,225))
     pyg.event.get()
     #image settings
-    g_clef = pyg.image.load(os.path.join('data', 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\g_clef.png'))
+    g_clef = pyg.image.load(os.path.join('data', 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\g_clef.png'))
     g_clef = pyg.transform.rotozoom(g_clef, 0,0.185)
     #image settings
 
     #image prints
-    screen.blit(g_clef, (i + 0,0))
-    screen.blit(g_clef, (i + 0,100))
-    screen.blit(g_clef, (i + 0,200))
-    screen.blit(g_clef, (i + 0,300))
-    screen.blit(g_clef, (i + 0,400))
-    screen.blit(g_clef, (i + 0,500))
-    i += 0.0
+    screen.blit(g_clef, (0,0))
+    screen.blit(g_clef, (0,100))
+    screen.blit(g_clef, (0,200))
+    screen.blit(g_clef, (0,300))
+    screen.blit(g_clef, (0,400))
+    screen.blit(g_clef, (0,500))
     #image prints
 
     #pentagrams
@@ -105,12 +116,14 @@ while running:
     pyg.draw.line(screen,(0,0,0), (450,520), (450,580), 2)
     pyg.draw.line(screen,(0,0,0), (665,520), (665,580), 2)
     pyg.draw.line(screen,(0,0,0), (880,520), (880,580), 2)
-
     #compass lines
 
     #update image
     pyg.display.flip()
     #update image
-    for event in pyg.event.get():
-        if event.type == pyg.QUIT:
-            running = False
+
+    #exit button does't work without loop ='(
+    #so, I'm using no border window
+    #for event in pyg.event.get():
+    #    if event.type == pyg.QUIT:
+    #        running = False
