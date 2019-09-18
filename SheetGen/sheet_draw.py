@@ -20,11 +20,11 @@ def draw_note_figure(note_figure, position_x, position_y, increase_point, resize
     screen.blit(note_figure, (position_x, position_y))
     #annotate the new note played
 
-    #TEM QUE ARRUMAR ESSA BAGAÇA AQUI!
+    #NOT IMPLEMENTED YET
     if increase_point:
         #annotate increase point
         note_figure = pyg.image.load(os.path.join('data', note_figure))
-        note_figure = pyg.transform.rotozoom(note_figure, 0, 0.0185)
+        note_figure = pyg.transform.rotozoom(note_figure, 0, resize_multiplier)
         screen.blit(note_figure, (position_x, position_y))
         #annotate increase point
     #update image

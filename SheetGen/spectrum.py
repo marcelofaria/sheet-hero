@@ -13,7 +13,7 @@ import time                     #calcula o tempo das notas
 #frames per buffer
 #the bigger the multiplier, the bigger the note grasp accuracy
 #however, for reason of this performance loss, the note time accuracy decreases
-CHUNK    = 1024 * 10
+CHUNK    = 1024 * 10 #10 is ideal
 #quantity of bytes per sample
 FORMAT   = pyaudio.paInt16
 #mono or estereo
@@ -65,13 +65,13 @@ thismanager.window.state('zoomed')
 plt.show(block=False)
 #plt.summer()
 #loop utilities
-note          = ''          #initial declaration <> empty
-previous_note = '1'         #initial declaration <> empty
-time_start    = 0           #initial declaration = 0 to count the time of the note
-movement      = 75         #fluidity test
-note_x        = 0           #
-note_y        = 0           #
-
+note              = ''          #initial declaration <> empty
+previous_note     = '1'         #initial declaration <> empty
+time_start        = 0           #initial declaration = 0 to count the time of the note
+movement          = 75          #fluidity test
+note_x            = 0           #
+note_y            = 0           #
+pentagram_control = 1           #
 #------------------- VARIABLES DECLARATION -------------------#
 
 #-------------------     MAIN LOOP      -------------------#
@@ -168,9 +168,12 @@ while True:
         time_elapsed = time.time()
         total_time = time_elapsed - time_start
         if(total_time > 0.19 and total_time < 64):
-            position_y_sheet = rules.return_position_y(note)
+            position_y_sheet = rules.return_position_y(note, pentagram_control)
             note_symbol = rules.note_figure(float(total_time), movement , position_y_sheet, 0.05)
             if(note_symbol != 'Fora do tempo'):
+                if(movement >= 830):
+                    movement = 75
+                    pentagram_control += 1
                 movement += 20
             print(note, "%.2f" % (time_elapsed - time_start))
             print(note_symbol)
@@ -191,3 +194,21 @@ while True:
         break
 
 #-------------------     MAIN LOOP      -------------------#
+
+#-- TASKS --#
+#FEITO - IMPLEMENTAR VERIFICAÇÃO PARA MUDAR DE PENTAGRAMA QUANDO O ATUAL FOR COMPLETAMENTE PREENCHIDO
+#IMPLEMENTAR CONFIGURAÇÃO DE ARMADURA DE CLAVE - PRECISO DOS ACIDENTES
+#IMPLEMENTAR CONFIGURAÇÃO DE ARMADURA DE COMPASSO - PRECISO DOS NUMEROS
+#IMPLEMENTAR INTELIGÊNCIA DE PREENCHIMENTO DE COMPASSOS BASEADOS NA ARMADURA DE CLAVE - PRECISO PENSAR
+#IMPLEMENTAR INTELIGÊNCIA DE DISTÂNCIA ENTRE NOTAS PARA PREENCHIMENTO DO COMPASSO - DA PRA FAZER
+#IMPLEMENTAR CONFIGURAÇÃO DE ANDAMENTO (BPM) - PRECISO PENSAR
+#IMPLEMENTAR SISTEMA QUE DETERMINA OS RANGES DE TEMPOS DAS NOTAS BASEADO NO BPM INSERIDO - CONSULTAR BPM CALCULATOR
+#IMPLEMENTAR INTELIGÊNCIA PARA RESOLVER OS 'Fora do tempo'. NÃO DEVE EXISTIR NENHUM 'Fora do tempo'. QUALQUER TEMPO É PASSÍVEL DE REPRESENTAÇÃO
+    #IMPLEMENTAR SISTEMA DE LIGADURAS PARA RESOLVER O PROBLEMA ACIMA
+#IMPLEMENTAR CONFIGURAÇÃO PARA TÍTULO E INFORMAÇÕES DA PARTITURA
+
+#-- PROBLEMAS --#
+#SE A MESMA NOTA FOR TOCADA VÁRIAS VEZES, O ALGORITMO VAI CONSIDERAR COMO UMA VEZ =( - FERROU
+    #ANALISAR ALTURA DA ONDA PARA IDENTIFICAR AS TRANSIÇÕES
+#ALGUMAS NOTAS AINDA ESTÃO SENDO DESENHADAS MAIS DISTANTES
+    #VERIFICAR AS NOTAS QUE NÃO FORAM CATEGORIZADAS E AS ACIDENTADAS
