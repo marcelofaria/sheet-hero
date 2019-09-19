@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="490dd0ed-b2a4-47c0-b768-7a7dde7f2399" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/initial_settings_gui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initial_settings_gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/initial_settings_gui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spectrum.py" beforeDir="false" afterPath="$PROJECT_DIR$/spectrum.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spectrum.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3438">
-              <caret line="199" column="44" selection-start-line="199" selection-start-column="44" selection-end-line="199" selection-end-column="44" />
+            <state relative-caret-position="3492">
+              <caret line="202" column="48" selection-start-line="202" selection-start-column="48" selection-end-line="202" selection-end-column="48" />
               <folding>
                 <element signature="e#0#61#0" expanded="true" />
               </folding>
@@ -27,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/initial_settings_gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+            <state relative-caret-position="339">
+              <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -48,10 +48,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rules.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
+            <state relative-caret-position="3060">
               <caret line="170" column="24" selection-start-line="170" selection-start-column="24" selection-end-line="170" selection-end-column="24" />
             </state>
           </provider>
@@ -76,6 +76,10 @@
       <find>time_start</find>
       <find>fft</find>
       <find>&quot;</find>
+      <find>self</find>
+      <find>widget1</find>
+      <find>widget</find>
+      <find>root.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,7 +107,7 @@
     <option name="FILTER_DEBUG" value="false" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="676" />
     <option name="width" value="697" />
     <option name="height" value="745" />
@@ -286,12 +290,12 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.waves" />
       <item itemvalue="Python.initial_settings_gui" />
       <item itemvalue="Python.plot_data" />
       <item itemvalue="Python.sheetDraw" />
       <item itemvalue="Python.sheet_draw" />
       <item itemvalue="Python.spectrum" />
-      <item itemvalue="Python.waves" />
     </list>
     <recent_temporary>
       <list>
@@ -307,13 +311,13 @@
     <configuration>C:\Users\MarceloAugustoStefan\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="ToolWindowManager">
-    <frame x="676" y="0" width="697" height="745" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.04552352" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.02232143" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32850242" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.76176023" weight="0.083333336" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.76176023" weight="0.19484702" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.90699404" weight="0.3970588" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -446,8 +450,8 @@
     <entry file="file://$PROJECT_DIR$/plot_data.py" />
     <entry file="file://$PROJECT_DIR$/spectrum.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3438">
-          <caret line="199" column="44" selection-start-line="199" selection-start-column="44" selection-end-line="199" selection-end-column="44" />
+        <state relative-caret-position="3492">
+          <caret line="202" column="48" selection-start-line="202" selection-start-column="48" selection-end-line="202" selection-end-column="48" />
           <folding>
             <element signature="e#0#61#0" expanded="true" />
           </folding>
@@ -464,17 +468,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/initial_settings_gui.py">
+    <entry file="file://$PROJECT_DIR$/rules.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        <state relative-caret-position="3060">
+          <caret line="170" column="24" selection-start-line="170" selection-start-column="24" selection-end-line="170" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rules.py">
+    <entry file="file://$PROJECT_DIR$/initial_settings_gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="170" column="24" selection-start-line="170" selection-start-column="24" selection-end-line="170" selection-end-column="24" />
+        <state relative-caret-position="339">
+          <caret line="97" column="43" selection-start-line="97" selection-start-column="43" selection-end-line="97" selection-end-column="43" />
         </state>
       </provider>
     </entry>
