@@ -1,4 +1,5 @@
 from tkinter import *
+import spectrum
 
 root = Tk()
 root.A = Frame(root)
@@ -19,8 +20,14 @@ root.E.pack(side = BOTTOM)
 root.geometry('400x350+490+100')
 
 def get_values():
-    compass = root.radio1.info()
-    print (compass)
+    compass = b.get()
+    clef    = v.get()
+
+    results = str(compass) + ' ' + str(clef)
+    print(results)
+    root.ok['command'] = root.destroy
+    root.ok.invoke()
+    spectrum.sheet_hero(compass, clef)
 
 root.msg = Label(root.A, text = 'Bem vindo ao SheetHero')
 root.msg['font'] = ('Calibri', '10', 'bold')
@@ -91,11 +98,11 @@ root.radio.pack()
 root.radio = Radiobutton(root.D, text = 'Sib Maior', value = 23, variable = b)
 root.radio.pack()
 
-root.ok = Button(root.E)
+root.ok = Button(root.E, command=get_values)
 root.ok['text'] = 'Confirmar'
 root.ok['font'] = ('Calibri', '10')
 root.ok['width'] = 50
-root.ok['command'] = root.radio1.deselect()
+#root.ok['command'] = root.destroy
 root.ok.pack()
 
 root.mainloop()

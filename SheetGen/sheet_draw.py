@@ -30,23 +30,27 @@ def draw_note_figure(note_figure, position_x, position_y, increase_point, resize
     #update image
     pyg.display.flip()
 
-def draw_sheet():
+def draw_sheet(compass, clef):
 #while running:
     #screen.fill((255,255,225))
     pyg.event.get()
+
     #image settings
     g_clef = pyg.image.load(os.path.join('data', 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\g_clef.png'))
     g_clef = pyg.transform.rotozoom(g_clef, 0,0.185)
     #image settings
 
-    #image prints
+    #IMPLEMENTAR A ROTINA PARA CONFIGURAR A
+    #ARMADURA DE COMPASSO E ARMADURA DE CLAVE
+
+    #clef prints
     screen.blit(g_clef, (0,0))
     screen.blit(g_clef, (0,100))
     screen.blit(g_clef, (0,200))
     screen.blit(g_clef, (0,300))
     screen.blit(g_clef, (0,400))
     screen.blit(g_clef, (0,500))
-    #image prints
+    #clef prints
 
     #pentagrams
     pyg.draw.line(screen,(0,0,0), (20,20), (880,20), 1)
