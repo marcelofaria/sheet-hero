@@ -182,15 +182,18 @@ def sheet_hero(compass, clef):
 
         previous_note = note
 
-        sd.draw_sheet(compass, clef)
+        sd.draw_sheet()
+        distance = sd.draw_armor_clef(clef)
+        sd.draw_armor_compass(compass, distance)
+
 
         #movement += movement
 
         #updates the figure
         try:
-            fig.canvas.draw()
+            #fig.canvas.draw()
             fig.canvas.flush_events()
-            ann.remove() #erases the wave peak annotation
+            #ann.remove() #erases the wave peak annotation
         except TclError:
             break
 
@@ -198,9 +201,9 @@ def sheet_hero(compass, clef):
 
     #-- TASKS --#
     #FEITO - IMPLEMENTAR VERIFICAÇÃO PARA MUDAR DE PENTAGRAMA QUANDO O ATUAL FOR COMPLETAMENTE PREENCHIDO
-    #IMPLEMENTAR SISTEMA DE CONFIGURAÇÃO INICIAL COM INTERFACE GRÁFICA
-        #IMPLEMENTAR CONFIGURAÇÃO DE ARMADURA DE CLAVE
-        #IMPLEMENTAR CONFIGURAÇÃO DE ARMADURA DE COMPASSO
+    #FEITO - IMPLEMENTAR SISTEMA DE CONFIGURAÇÃO INICIAL COM INTERFACE GRÁFICA
+        #FEITO - IMPLEMENTAR CONFIGURAÇÃO DE ARMADURA DE CLAVE
+        #FEITO - IMPLEMENTAR CONFIGURAÇÃO DE ARMADURA DE COMPASSO
         #IMPLEMENTAR CONFIGURAÇÃO DE ANDAMENTO (BPM)
     #IMPLEMENTAR INTELIGÊNCIA DE PREENCHIMENTO DE COMPASSOS BASEADOS NA ARMADURA DE CLAVE - PRECISO PENSAR
     #IMPLEMENTAR INTELIGÊNCIA DE DISTÂNCIA ENTRE NOTAS PARA PREENCHIMENTO DO COMPASSO - DA PRA FAZER
@@ -208,9 +211,12 @@ def sheet_hero(compass, clef):
     #IMPLEMENTAR INTELIGÊNCIA PARA RESOLVER OS 'Fora do tempo'. NÃO DEVE EXISTIR NENHUM 'Fora do tempo'. QUALQUER TEMPO É PASSÍVEL DE REPRESENTAÇÃO
         #IMPLEMENTAR SISTEMA DE LIGADURAS PARA RESOLVER O PROBLEMA ACIMA
     #IMPLEMENTAR CONFIGURAÇÃO PARA TÍTULO E INFORMAÇÕES DA PARTITURA
+    #FEITO - CONSERTAR O POSICIONAMENTO DA JANELA QUANDO INICIAR O SISTEMA
+    #REDIMENSIONAR A
 
     #-- PROBLEMAS --#
     #SE A MESMA NOTA FOR TOCADA VÁRIAS VEZES, O ALGORITMO VAI CONSIDERAR COMO UMA VEZ =( - FERROU
+        #POSSÍVEL SOLUÇÃO
         #ANALISAR ALTURA DA ONDA PARA IDENTIFICAR AS TRANSIÇÕES
     #ALGUMAS NOTAS AINDA ESTÃO SENDO DESENHADAS MAIS DISTANTES
         #VERIFICAR AS NOTAS QUE NÃO FORAM CATEGORIZADAS E AS ACIDENTADAS

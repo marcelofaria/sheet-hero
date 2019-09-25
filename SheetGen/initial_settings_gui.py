@@ -2,6 +2,9 @@ from tkinter import *
 import spectrum
 
 root = Tk()
+root.title('Sheet Hero')
+root.iconbitmap('C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\media\\colcheia_Vew_icon.ico')
+
 root.A = Frame(root)
 root.A.pack(side = TOP)
 
@@ -17,11 +20,11 @@ root.C.pack(anchor = N)
 root.E = Frame(root)
 root.E.pack(side = BOTTOM)
 
-root.geometry('400x350+490+100')
+root.geometry('400x350+475+100')
 
 def get_values():
-    compass = b.get()
-    clef    = v.get()
+    compass = v.get()
+    clef    = b.get()
 
     results = str(compass) + ' ' + str(clef)
     print(results)

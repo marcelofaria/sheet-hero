@@ -1,17 +1,29 @@
 import os
 import pygame as pyg
+import os
+pos_x = 1366 / 2 - 900 / 2
+pos_y = 768 - 600
+os.environ['SDL_VIDEO_WINDOW_POS'] = '%i,%i' % (pos_x,pos_y)
+os.environ['SDL_VIDEO_CENTERED'] = '0'
 #from win32api import GetSystemMetrics
 
 #(width, height) = (int(GetSystemMetrics(0)), int(GetSystemMetrics(1)))
 (width, height) = (900,600)
 screen = pyg.display.set_mode((width, height), pyg.RESIZABLE)
+#sheet color
 screen.fill((255,255,225))
+
+icon = pyg.image.load('C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\media\\colcheia_Vew_icon.ico')
+
 pyg.display.set_caption('Sheet Gen')
-pyg.display.set_icon(screen)
+pyg.display.set_icon(icon)
 pyg.display.init()
 
-def config_clef_armor(quantity, key_signature):
-    print('sorry, it does\'nt was implemented yet :(')
+four      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\N4.png'             #path
+six       = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\N6.png'             #path
+eight     = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\N8.png'             #path
+sharp     = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\sustenido.png'      #path
+flat      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\bemol.png'          #path
 
 def draw_note_figure(note_figure, position_x, position_y, increase_point, resize_multiplier):
     #annotate the new note played
@@ -30,18 +42,98 @@ def draw_note_figure(note_figure, position_x, position_y, increase_point, resize
     #update image
     pyg.display.flip()
 
-def draw_sheet(compass, clef):
+def draw_armor_clef(clef):
+
+    #Dó  3
+    #Sol 7
+    #Fá  6
+
+    if(clef == 3):
+        return 45
+
+    elif(clef == 7):
+        g_major = pyg.image.load(os.path.join('data', sharp))
+        g_major = pyg.transform.rotozoom(g_major, 0, 0.035)
+
+        screen.blit(g_major, (63,9))
+        screen.blit(g_major, (63,109))
+        screen.blit(g_major, (63,209))
+        screen.blit(g_major, (63,309))
+        screen.blit(g_major, (63,409))
+        screen.blit(g_major, (63,509))
+
+        return 63
+    elif(clef == 6):
+        g_major = pyg.image.load(os.path.join('data', flat))
+        g_major = pyg.transform.rotozoom(g_major, 0, 0.035)
+
+        screen.blit(g_major, (60,31))
+        screen.blit(g_major, (60,131))
+        screen.blit(g_major, (60,231))
+        screen.blit(g_major, (60,331))
+        screen.blit(g_major, (60,431))
+        screen.blit(g_major, (60,531))
+
+        return 60
+
+def draw_armor_compass(compass, distance):
+
+    distance += 23
+
+    #4/4 1
+    #6/8 2
+
+    if(compass == 1):
+
+        quaternario = pyg.image.load(os.path.join('data', four))
+        quaternario = pyg.transform.rotozoom(quaternario, 0, 0.046)
+
+        #quatro
+        screen.blit(quaternario, (distance,30))
+        screen.blit(quaternario, (distance,130))
+        screen.blit(quaternario, (distance,230))
+        screen.blit(quaternario, (distance,330))
+        screen.blit(quaternario, (distance,430))
+        screen.blit(quaternario, (distance,530))
+        #quatro
+        screen.blit(quaternario, (distance,50))
+        screen.blit(quaternario, (distance,150))
+        screen.blit(quaternario, (distance,250))
+        screen.blit(quaternario, (distance,350))
+        screen.blit(quaternario, (distance,450))
+        screen.blit(quaternario, (distance,550))
+
+    elif(compass == 2):
+
+        binario_composto_seis = pyg.image.load(os.path.join('data', six))
+        binario_composto_oito = pyg.image.load(os.path.join('data', eight))
+        binario_composto_seis = pyg.transform.rotozoom(binario_composto_seis, 0, 0.046)
+        binario_composto_oito = pyg.transform.rotozoom(binario_composto_oito, 0, 0.046)
+
+        #seis
+        screen.blit(binario_composto_seis, (distance,30))
+        screen.blit(binario_composto_seis, (distance,130))
+        screen.blit(binario_composto_seis, (distance,230))
+        screen.blit(binario_composto_seis, (distance,330))
+        screen.blit(binario_composto_seis, (distance,430))
+        screen.blit(binario_composto_seis, (distance,530))
+        #oito
+        screen.blit(binario_composto_oito, (distance,50))
+        screen.blit(binario_composto_oito, (distance,150))
+        screen.blit(binario_composto_oito, (distance,250))
+        screen.blit(binario_composto_oito, (distance,350))
+        screen.blit(binario_composto_oito, (distance,450))
+        screen.blit(binario_composto_oito, (distance,550))
+
+def draw_sheet():
 #while running:
     #screen.fill((255,255,225))
     pyg.event.get()
 
     #image settings
     g_clef = pyg.image.load(os.path.join('data', 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\g_clef.png'))
-    g_clef = pyg.transform.rotozoom(g_clef, 0,0.185)
+    g_clef = pyg.transform.rotozoom(g_clef, 0, 0.185)
     #image settings
-
-    #IMPLEMENTAR A ROTINA PARA CONFIGURAR A
-    #ARMADURA DE COMPASSO E ARMADURA DE CLAVE
 
     #clef prints
     screen.blit(g_clef, (0,0))
