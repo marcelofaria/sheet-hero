@@ -8,7 +8,7 @@ import rules                    #meu módulo para definir notas e tempos
 import sheet_draw as sd         #meu módulo para imprimir a partitura
 import time                     #calcula o tempo das notas
 
-def sheet_hero(compass, clef):
+def sheet_hero(compass, clef, tempo):
     #------------------- VARIABLES DECLARATION -------------------#
 
     #frames per buffer
@@ -185,6 +185,7 @@ def sheet_hero(compass, clef):
         sd.draw_sheet()
         distance = sd.draw_armor_clef(clef)
         sd.draw_armor_compass(compass, distance)
+        sd.draw_tempo(tempo, compass)
 
 
         #movement += movement
@@ -204,7 +205,7 @@ def sheet_hero(compass, clef):
     #FEITO - IMPLEMENTAR SISTEMA DE CONFIGURAÇÃO INICIAL COM INTERFACE GRÁFICA
         #FEITO - IMPLEMENTAR CONFIGURAÇÃO DE ARMADURA DE CLAVE
         #FEITO - IMPLEMENTAR CONFIGURAÇÃO DE ARMADURA DE COMPASSO
-        #IMPLEMENTAR CONFIGURAÇÃO DE ANDAMENTO (BPM)
+        #FEITO - IMPLEMENTAR CONFIGURAÇÃO DE ANDAMENTO (BPM)
     #IMPLEMENTAR INTELIGÊNCIA DE PREENCHIMENTO DE COMPASSOS BASEADOS NA ARMADURA DE CLAVE - PRECISO PENSAR
     #IMPLEMENTAR INTELIGÊNCIA DE DISTÂNCIA ENTRE NOTAS PARA PREENCHIMENTO DO COMPASSO - DA PRA FAZER
     #IMPLEMENTAR SISTEMA QUE DETERMINA OS RANGES DE TEMPOS DAS NOTAS BASEADO NO BPM INSERIDO - CONSULTAR BPM CALCULATOR

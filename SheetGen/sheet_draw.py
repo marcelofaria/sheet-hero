@@ -1,4 +1,4 @@
-import os
+import media as m
 import pygame as pyg
 import os
 pos_x = 1366 / 2 - 900 / 2
@@ -13,17 +13,11 @@ screen = pyg.display.set_mode((width, height), pyg.RESIZABLE)
 #sheet color
 screen.fill((255,255,225))
 
-icon = pyg.image.load('C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\media\\colcheia_Vew_icon.ico')
+icon = pyg.image.load(m.ico)
 
 pyg.display.set_caption('Sheet Gen')
 pyg.display.set_icon(icon)
 pyg.display.init()
-
-four      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\N4.png'             #path
-six       = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\N6.png'             #path
-eight     = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\N8.png'             #path
-sharp     = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\sustenido.png'      #path
-flat      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\bemol.png'          #path
 
 def draw_note_figure(note_figure, position_x, position_y, increase_point, resize_multiplier):
     #annotate the new note played
@@ -42,6 +36,64 @@ def draw_note_figure(note_figure, position_x, position_y, increase_point, resize
     #update image
     pyg.display.flip()
 
+def draw_tempo(tempo, compass):
+    #60 24
+    #75 25
+    #90 26
+
+    if(compass == 1):
+        smn = pyg.image.load(os.path.join('data', m.seminima))
+        smn = pyg.transform.rotozoom(smn, 0, 0.02)
+
+        screen.blit(smn, (90,0))
+
+    elif(compass == 2):
+        smn = pyg.image.load(os.path.join('data', m.seminima))
+        smn = pyg.transform.rotozoom(smn, 0, 0.02)
+
+        dot = pyg.image.load(os.path.join('data', m.ponto))
+        dot = pyg.transform.rotozoom(dot, 0, 0.007)
+
+        screen.blit(smn, (85,0))
+        screen.blit(dot, (97,11))
+
+    else:
+        pass
+
+    if(tempo == 24):
+        six_print = pyg.image.load(os.path.join('data', m.six))
+        six_print = pyg.transform.rotozoom(six_print, 0, 0.025)
+
+        zero_print = pyg.image.load(os.path.join('data', m.zero))
+        zero_print = pyg.transform.rotozoom(zero_print, 0, 0.025)
+
+        screen.blit(six_print, (103,3))
+        screen.blit(zero_print, (110,3))
+
+    elif(tempo == 25):
+        seven_print = pyg.image.load(os.path.join('data', m.seven))
+        seven_print = pyg.transform.rotozoom(seven_print, 0, 0.025)
+
+        five_print = pyg.image.load(os.path.join('data', m.five))
+        five_print = pyg.transform.rotozoom(five_print, 0, 0.025)
+
+        screen.blit(seven_print, (103,3))
+        screen.blit(five_print,  (110,3))
+
+    elif(tempo == 26):
+        nine_print = pyg.image.load(os.path.join('data', m.nine))
+        nine_print = pyg.transform.rotozoom(nine_print, 0, 0.025)
+
+        zero_print = pyg.image.load(os.path.join('data', m.zero))
+        zero_print = pyg.transform.rotozoom(zero_print, 0, 0.025)
+
+        screen.blit(nine_print, (103,3))
+        screen.blit(zero_print,  (110,3))
+
+        os.environ['SDL_VIDEO_WINDOW_POS'] = '%i,%i' % (pos_x,pos_y)
+        os.environ['SDL_VIDEO_CENTERED'] = '0'
+
+
 def draw_armor_clef(clef):
 
     #Dó  3
@@ -52,7 +104,7 @@ def draw_armor_clef(clef):
         return 45
 
     elif(clef == 7):
-        g_major = pyg.image.load(os.path.join('data', sharp))
+        g_major = pyg.image.load(os.path.join('data', m.sharp))
         g_major = pyg.transform.rotozoom(g_major, 0, 0.035)
 
         screen.blit(g_major, (63,9))
@@ -64,7 +116,7 @@ def draw_armor_clef(clef):
 
         return 63
     elif(clef == 6):
-        g_major = pyg.image.load(os.path.join('data', flat))
+        g_major = pyg.image.load(os.path.join('data', m.flat))
         g_major = pyg.transform.rotozoom(g_major, 0, 0.035)
 
         screen.blit(g_major, (60,31))
@@ -85,7 +137,7 @@ def draw_armor_compass(compass, distance):
 
     if(compass == 1):
 
-        quaternario = pyg.image.load(os.path.join('data', four))
+        quaternario = pyg.image.load(os.path.join('data', m.four))
         quaternario = pyg.transform.rotozoom(quaternario, 0, 0.046)
 
         #quatro
@@ -105,8 +157,8 @@ def draw_armor_compass(compass, distance):
 
     elif(compass == 2):
 
-        binario_composto_seis = pyg.image.load(os.path.join('data', six))
-        binario_composto_oito = pyg.image.load(os.path.join('data', eight))
+        binario_composto_seis = pyg.image.load(os.path.join('data', m.six))
+        binario_composto_oito = pyg.image.load(os.path.join('data', m.eight))
         binario_composto_seis = pyg.transform.rotozoom(binario_composto_seis, 0, 0.046)
         binario_composto_oito = pyg.transform.rotozoom(binario_composto_oito, 0, 0.046)
 
@@ -131,7 +183,7 @@ def draw_sheet():
     pyg.event.get()
 
     #image settings
-    g_clef = pyg.image.load(os.path.join('data', 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\g_clef.png'))
+    g_clef = pyg.image.load(os.path.join('data', m.g_clef))
     g_clef = pyg.transform.rotozoom(g_clef, 0, 0.185)
     #image settings
 

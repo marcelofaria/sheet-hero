@@ -1,12 +1,5 @@
 import sheet_draw as sd         #meu módulo para imprimir a partitura
-
-semibreve     = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\semibreve.png'      #path
-minima        = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\minima.png'         #path
-seminima      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\seminima.png'       #path
-colcheia      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\colcheia.png'       #path
-semicolcheia  = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\semicolcheia.png'   #path
-fusa          = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\fusa.png'           #path
-semifusa      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\Media\\semifusa.png'       #path
+import media as m
 
 def define_note(frequency_hz):
     #usar BUSCA BINARIA
@@ -123,28 +116,28 @@ def define_note(frequency_hz):
 
 def note_figure(time_elapsed, x, y, resize_multiplier):
     if (time_elapsed >= 3.8 and time_elapsed <= 4.2):
-        sd.draw_note_figure(semibreve, x, y, False, resize_multiplier)
+        sd.draw_note_figure(m.semibreve, x, y, False, resize_multiplier)
         return ('SEMIBREVE 𝅝 4 tempos')
     elif (time_elapsed >= 2.8 and time_elapsed <= 3.2):
-        sd.draw_note_figure(minima, x, y, False, resize_multiplier)
+        sd.draw_note_figure(m.minima, x, y, False, resize_multiplier)
         return ('MINIMA. 𝅗𝅥. 3 tempos')
     elif (time_elapsed >= 1.8 and time_elapsed <= 2.2):
-        sd.draw_note_figure(minima, x, y, False, resize_multiplier)
+        sd.draw_note_figure(m.minima, x, y, False, resize_multiplier)
         return ('MINIMA 𝅗𝅥 2 tempos')
     elif (time_elapsed >= 1.3 and time_elapsed <= 1.7):
-        sd.draw_note_figure(seminima, x, y, False, resize_multiplier)
+        sd.draw_note_figure(m.seminima, x, y, False, resize_multiplier)
         return ('SEMINIMA. ♩. 1.5 tempos')
     elif (time_elapsed >= 0.8 and time_elapsed <= 1.2):
-        sd.draw_note_figure(seminima, x, y, False, resize_multiplier)
+        sd.draw_note_figure(m.seminima, x, y, False, resize_multiplier)
         return ('SEMINIMA ♩ 1 tempo')
     elif (time_elapsed >= 0.71 and time_elapsed <= 0.79):
-        sd.draw_note_figure(colcheia, x, y, False, resize_multiplier)
+        sd.draw_note_figure(m.colcheia, x, y, False, resize_multiplier)
         return ('COLCHEIA. 𝅘𝅥𝅮. 0.75 tempo')
     elif (time_elapsed >= 0.3 and time_elapsed <= 0.7):
-        sd.draw_note_figure(colcheia, x, y, False, resize_multiplier)
+        sd.draw_note_figure(m.colcheia, x, y, False, resize_multiplier)
         return ('COLCHEIA 𝅘𝅥𝅮 0.5 tempo')
     elif (time_elapsed >= 0.2 and time_elapsed <= 0.29):
-        sd.draw_note_figure(semicolcheia, x, y, False, resize_multiplier)
+        sd.draw_note_figure(m.semicolcheia, x, y, False, resize_multiplier)
         return ('SEMICOLCHEIA 𝅘𝅥𝅯 0.25 tempo')
 
     else:
@@ -185,5 +178,8 @@ def return_position_y(note, pentagram):
     elif(pentagram == 5):
         axis_y_pentagram += 400
         return axis_y_pentagram
-    else:
+    elif(pentagram == 5):
+        axis_y_pentagram += 500
         return axis_y_pentagram
+    else:
+        return -100000000
