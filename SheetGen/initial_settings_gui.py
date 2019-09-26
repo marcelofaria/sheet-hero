@@ -21,18 +21,19 @@ root.C.pack(anchor = N)
 root.E = Frame(root)
 root.E.pack(side = BOTTOM)
 
-root.geometry('400x425+475+100')
+root.geometry('400x490+475+100')
 
 def get_values():
     compass = v.get()
     clef    = b.get()
     tempo   = c.get()
+    title   = root.txt_field.get()
 
     #results = str(compass) + ' ' + str(clef) + ' ' + str(tempo)
-    #print(results)
+    #print(title)
     root.ok['command'] = root.destroy
     root.ok.invoke()
-    spectrum.sheet_hero(compass, clef, tempo)
+    spectrum.sheet_hero(compass, clef, tempo, title)
 
 v = IntVar()
 b = IntVar()
@@ -42,15 +43,22 @@ root.msg = Label(root.A, text = 'Bem vindo! Configure sua partitura')
 root.msg['font'] = ('Calibri', '10', 'bold')
 root.msg.pack()
 
+root.msg = Label(root.A, text = 'Digite o Título')
+root.msg['font'] = ('Calibri', '10')
+root.msg.pack()
+
+root.txt_field = Entry(root.A, width = 60, justify = CENTER)
+root.txt_field.pack()
+
 root.msg = Label(root.A, text = 'Escolha o Andamento')
 root.msg['font'] = ('Calibri', '10')
 root.msg.pack()
 
-root.radio = Radiobutton(root.A, text = '60', value = 24, variable = c)
+root.radio = Radiobutton(root.A, text = '60 bpm', value = 24, variable = c)
 root.radio.pack()
-root.radio = Radiobutton(root.A, text = '75', value = 25, variable = c)
+root.radio = Radiobutton(root.A, text = '75 bpm', value = 25, variable = c)
 root.radio.pack()
-root.radio = Radiobutton(root.A, text = '90', value = 26, variable = c)
+root.radio = Radiobutton(root.A, text = '90 bpm', value = 26, variable = c)
 root.radio.pack()
 
 root.msg = Label(root.A, text = 'Escolha a Armadura de Compasso')
@@ -111,6 +119,11 @@ root.radio.pack()
 root.radio = Radiobutton(root.D, text = 'Sib Maior', value = 23, variable = b, state = DISABLED)
 root.radio.pack()
 
+root.msg = Label(root.E, text = ' ')
+root.msg['font'] = ('Calibri', '10')
+root.msg.pack()
+
+
 root.ok = Button(root.E, command=get_values)
 root.ok['text'] = 'Confirmar'
 root.ok['font'] = ('Calibri', '10')
@@ -118,7 +131,8 @@ root.ok['width'] = 50
 #root.ok['command'] = root.destroy
 root.ok.pack()
 
+root.msg = Label(root.E, text = ' ')
+root.msg['font'] = ('Calibri', '10')
+root.msg.pack()
+
 root.mainloop()
-
-
-

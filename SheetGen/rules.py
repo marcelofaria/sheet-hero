@@ -182,4 +182,4 @@ def return_position_y(note, pentagram):
         axis_y_pentagram += 500
         return axis_y_pentagram
     else:
-        return -100000000
+        return axis_y_pentagram

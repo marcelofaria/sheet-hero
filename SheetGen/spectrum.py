@@ -8,7 +8,7 @@ import rules                    #meu módulo para definir notas e tempos
 import sheet_draw as sd         #meu módulo para imprimir a partitura
 import time                     #calcula o tempo das notas
 
-def sheet_hero(compass, clef, tempo):
+def sheet_hero(compass, clef, tempo, title):
     #------------------- VARIABLES DECLARATION -------------------#
 
     #frames per buffer
@@ -69,7 +69,7 @@ def sheet_hero(compass, clef, tempo):
     note              = ''          #initial declaration <> empty
     previous_note     = '1'         #initial declaration <> empty
     time_start        = 0           #initial declaration = 0 to count the time of the note
-    movement          = 75          #fluidity test
+    movement          = 90          #
     note_x            = 0           #
     note_y            = 0           #
     pentagram_control = 1           #
@@ -162,6 +162,12 @@ def sheet_hero(compass, clef, tempo):
         #--- IMPRIME O NOME E O SÍMBOLO DA NOTA TOCADA ---#
         note = rules.define_note(splitedX[maxX])
 
+        sd.draw_sheet()
+        distance = sd.draw_armor_clef(clef)
+        sd.draw_armor_compass(compass, distance)
+        sd.draw_tempo(tempo, compass)
+        sd.draw_title(title)
+
         if(note == previous_note):
             #print(note + ' ' + previous_note)
             pass
@@ -170,10 +176,10 @@ def sheet_hero(compass, clef, tempo):
             total_time = time_elapsed - time_start
             if(total_time > 0.19 and total_time < 64):
                 position_y_sheet = rules.return_position_y(note, pentagram_control)
-                note_symbol = rules.note_figure(float(total_time), movement , position_y_sheet, 0.05)
+                note_symbol = rules.note_figure(float(total_time), movement, position_y_sheet, 0.05)
                 if(note_symbol != 'Fora do tempo'):
-                    if(movement >= 830):
-                        movement = 75
+                    if(movement >= 1230):
+                        movement = 90
                         pentagram_control += 1
                     movement += 20
                 print(note, "%.2f" % (time_elapsed - time_start))
@@ -182,10 +188,6 @@ def sheet_hero(compass, clef, tempo):
 
         previous_note = note
 
-        sd.draw_sheet()
-        distance = sd.draw_armor_clef(clef)
-        sd.draw_armor_compass(compass, distance)
-        sd.draw_tempo(tempo, compass)
 
 
         #movement += movement
@@ -199,25 +201,3 @@ def sheet_hero(compass, clef, tempo):
             break
 
     #-------------------     MAIN LOOP      -------------------#
-
-    #-- TASKS --#
-    #FEITO - IMPLEMENTAR VERIFICAÇÃO PARA MUDAR DE PENTAGRAMA QUANDO O ATUAL FOR COMPLETAMENTE PREENCHIDO
-    #FEITO - IMPLEMENTAR SISTEMA DE CONFIGURAÇÃO INICIAL COM INTERFACE GRÁFICA
-        #FEITO - IMPLEMENTAR CONFIGURAÇÃO DE ARMADURA DE CLAVE
-        #FEITO - IMPLEMENTAR CONFIGURAÇÃO DE ARMADURA DE COMPASSO
-        #FEITO - IMPLEMENTAR CONFIGURAÇÃO DE ANDAMENTO (BPM)
-    #IMPLEMENTAR INTELIGÊNCIA DE PREENCHIMENTO DE COMPASSOS BASEADOS NA ARMADURA DE CLAVE - PRECISO PENSAR
-    #IMPLEMENTAR INTELIGÊNCIA DE DISTÂNCIA ENTRE NOTAS PARA PREENCHIMENTO DO COMPASSO - DA PRA FAZER
-    #IMPLEMENTAR SISTEMA QUE DETERMINA OS RANGES DE TEMPOS DAS NOTAS BASEADO NO BPM INSERIDO - CONSULTAR BPM CALCULATOR
-    #IMPLEMENTAR INTELIGÊNCIA PARA RESOLVER OS 'Fora do tempo'. NÃO DEVE EXISTIR NENHUM 'Fora do tempo'. QUALQUER TEMPO É PASSÍVEL DE REPRESENTAÇÃO
-        #IMPLEMENTAR SISTEMA DE LIGADURAS PARA RESOLVER O PROBLEMA ACIMA
-    #IMPLEMENTAR CONFIGURAÇÃO PARA TÍTULO E INFORMAÇÕES DA PARTITURA
-    #FEITO - CONSERTAR O POSICIONAMENTO DA JANELA QUANDO INICIAR O SISTEMA
-    #REDIMENSIONAR A
-
-    #-- PROBLEMAS --#
-    #SE A MESMA NOTA FOR TOCADA VÁRIAS VEZES, O ALGORITMO VAI CONSIDERAR COMO UMA VEZ =( - FERROU
-        #POSSÍVEL SOLUÇÃO
-        #ANALISAR ALTURA DA ONDA PARA IDENTIFICAR AS TRANSIÇÕES
-    #ALGUMAS NOTAS AINDA ESTÃO SENDO DESENHADAS MAIS DISTANTES
-        #VERIFICAR AS NOTAS QUE NÃO FORAM CATEGORIZADAS E AS ACIDENTADAS

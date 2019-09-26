@@ -1,29 +1,48 @@
 import media as m
 import pygame as pyg
 import os
-pos_x = 1366 / 2 - 900 / 2
-pos_y = 768 - 600
+
+pos_x = 1366 / 2 - 1280 / 2
+pos_y = 768 - 720
 os.environ['SDL_VIDEO_WINDOW_POS'] = '%i,%i' % (pos_x,pos_y)
 os.environ['SDL_VIDEO_CENTERED'] = '0'
 #from win32api import GetSystemMetrics
 
 #(width, height) = (int(GetSystemMetrics(0)), int(GetSystemMetrics(1)))
-(width, height) = (900,600)
-screen = pyg.display.set_mode((width, height), pyg.RESIZABLE)
+(width, height) = (1280, 720)
+screen = pyg.display.set_mode((width, height))
+#pyg.transform.smoothscale(screen, (width//10, height//10))
 #sheet color
 screen.fill((255,255,225))
 
 icon = pyg.image.load(m.ico)
 
-pyg.display.set_caption('Sheet Gen')
+#global xy vars
+start = 20
+end   = 1260
+plus  = 90
+
 pyg.display.set_icon(icon)
 pyg.display.init()
+
+def draw_title(title):
+    number = len(title)
+
+    title_y = 630 - (number * 10)
+
+    pyg.display.set_caption(title)
+    pyg.font.init() # you have to call this at the start,
+                    # if you want to use this module.
+    my_font = pyg.font.SysFont('Calibri', 50)
+    #my_font.set_bold(True)
+    text_surface = my_font.render(title, False, (0, 0, 0))
+    screen.blit(text_surface,(title_y,25))
 
 def draw_note_figure(note_figure, position_x, position_y, increase_point, resize_multiplier):
     #annotate the new note played
     note_figure = pyg.image.load(os.path.join('data', note_figure))
     note_figure = pyg.transform.rotozoom(note_figure, 0, resize_multiplier)
-    screen.blit(note_figure, (position_x, position_y))
+    screen.blit(note_figure, (position_x, position_y + plus))
     #annotate the new note played
 
     #NOT IMPLEMENTED YET
@@ -31,7 +50,7 @@ def draw_note_figure(note_figure, position_x, position_y, increase_point, resize
         #annotate increase point
         note_figure = pyg.image.load(os.path.join('data', note_figure))
         note_figure = pyg.transform.rotozoom(note_figure, 0, resize_multiplier)
-        screen.blit(note_figure, (position_x, position_y))
+        screen.blit(note_figure, (position_x, position_y + plus))
         #annotate increase point
     #update image
     pyg.display.flip()
@@ -45,7 +64,7 @@ def draw_tempo(tempo, compass):
         smn = pyg.image.load(os.path.join('data', m.seminima))
         smn = pyg.transform.rotozoom(smn, 0, 0.02)
 
-        screen.blit(smn, (90,0))
+        screen.blit(smn, (90,0 + plus))
 
     elif(compass == 2):
         smn = pyg.image.load(os.path.join('data', m.seminima))
@@ -54,8 +73,8 @@ def draw_tempo(tempo, compass):
         dot = pyg.image.load(os.path.join('data', m.ponto))
         dot = pyg.transform.rotozoom(dot, 0, 0.007)
 
-        screen.blit(smn, (85,0))
-        screen.blit(dot, (97,11))
+        screen.blit(smn, (85,0 + plus))
+        screen.blit(dot, (97,11 + plus))
 
     else:
         pass
@@ -67,8 +86,8 @@ def draw_tempo(tempo, compass):
         zero_print = pyg.image.load(os.path.join('data', m.zero))
         zero_print = pyg.transform.rotozoom(zero_print, 0, 0.025)
 
-        screen.blit(six_print, (103,3))
-        screen.blit(zero_print, (110,3))
+        screen.blit(six_print, (103,3 + plus))
+        screen.blit(zero_print, (110,3 + plus))
 
     elif(tempo == 25):
         seven_print = pyg.image.load(os.path.join('data', m.seven))
@@ -77,8 +96,8 @@ def draw_tempo(tempo, compass):
         five_print = pyg.image.load(os.path.join('data', m.five))
         five_print = pyg.transform.rotozoom(five_print, 0, 0.025)
 
-        screen.blit(seven_print, (103,3))
-        screen.blit(five_print,  (110,3))
+        screen.blit(seven_print, (103,3 + plus))
+        screen.blit(five_print,  (110,3 + plus))
 
     elif(tempo == 26):
         nine_print = pyg.image.load(os.path.join('data', m.nine))
@@ -87,8 +106,8 @@ def draw_tempo(tempo, compass):
         zero_print = pyg.image.load(os.path.join('data', m.zero))
         zero_print = pyg.transform.rotozoom(zero_print, 0, 0.025)
 
-        screen.blit(nine_print, (103,3))
-        screen.blit(zero_print,  (110,3))
+        screen.blit(nine_print, (103,3 + plus))
+        screen.blit(zero_print,  (110,3 + plus))
 
         os.environ['SDL_VIDEO_WINDOW_POS'] = '%i,%i' % (pos_x,pos_y)
         os.environ['SDL_VIDEO_CENTERED'] = '0'
@@ -107,24 +126,24 @@ def draw_armor_clef(clef):
         g_major = pyg.image.load(os.path.join('data', m.sharp))
         g_major = pyg.transform.rotozoom(g_major, 0, 0.035)
 
-        screen.blit(g_major, (63,9))
-        screen.blit(g_major, (63,109))
-        screen.blit(g_major, (63,209))
-        screen.blit(g_major, (63,309))
-        screen.blit(g_major, (63,409))
-        screen.blit(g_major, (63,509))
+        screen.blit(g_major, (63,9 + plus))
+        screen.blit(g_major, (63,109 + plus))
+        screen.blit(g_major, (63,209 + plus))
+        screen.blit(g_major, (63,309 + plus))
+        screen.blit(g_major, (63,409 + plus))
+        screen.blit(g_major, (63,509 + plus))
 
         return 63
     elif(clef == 6):
         g_major = pyg.image.load(os.path.join('data', m.flat))
         g_major = pyg.transform.rotozoom(g_major, 0, 0.035)
 
-        screen.blit(g_major, (60,31))
-        screen.blit(g_major, (60,131))
-        screen.blit(g_major, (60,231))
-        screen.blit(g_major, (60,331))
-        screen.blit(g_major, (60,431))
-        screen.blit(g_major, (60,531))
+        screen.blit(g_major, (60,31 + plus))
+        screen.blit(g_major, (60,131 + plus))
+        screen.blit(g_major, (60,231 + plus))
+        screen.blit(g_major, (60,331 + plus))
+        screen.blit(g_major, (60,431 + plus))
+        screen.blit(g_major, (60,531 + plus))
 
         return 60
 
@@ -141,19 +160,19 @@ def draw_armor_compass(compass, distance):
         quaternario = pyg.transform.rotozoom(quaternario, 0, 0.046)
 
         #quatro
-        screen.blit(quaternario, (distance,30))
-        screen.blit(quaternario, (distance,130))
-        screen.blit(quaternario, (distance,230))
-        screen.blit(quaternario, (distance,330))
-        screen.blit(quaternario, (distance,430))
-        screen.blit(quaternario, (distance,530))
+        screen.blit(quaternario, (distance,30 + plus))
+        screen.blit(quaternario, (distance,130 + plus))
+        screen.blit(quaternario, (distance,230 + plus))
+        screen.blit(quaternario, (distance,330 + plus))
+        screen.blit(quaternario, (distance,430 + plus))
+        screen.blit(quaternario, (distance,530 + plus))
         #quatro
-        screen.blit(quaternario, (distance,50))
-        screen.blit(quaternario, (distance,150))
-        screen.blit(quaternario, (distance,250))
-        screen.blit(quaternario, (distance,350))
-        screen.blit(quaternario, (distance,450))
-        screen.blit(quaternario, (distance,550))
+        screen.blit(quaternario, (distance,50 + plus))
+        screen.blit(quaternario, (distance,150 + plus))
+        screen.blit(quaternario, (distance,250 + plus))
+        screen.blit(quaternario, (distance,350 + plus))
+        screen.blit(quaternario, (distance,450 + plus))
+        screen.blit(quaternario, (distance,550 + plus))
 
     elif(compass == 2):
 
@@ -163,23 +182,22 @@ def draw_armor_compass(compass, distance):
         binario_composto_oito = pyg.transform.rotozoom(binario_composto_oito, 0, 0.046)
 
         #seis
-        screen.blit(binario_composto_seis, (distance,30))
-        screen.blit(binario_composto_seis, (distance,130))
-        screen.blit(binario_composto_seis, (distance,230))
-        screen.blit(binario_composto_seis, (distance,330))
-        screen.blit(binario_composto_seis, (distance,430))
-        screen.blit(binario_composto_seis, (distance,530))
+        screen.blit(binario_composto_seis, (distance,30 + plus))
+        screen.blit(binario_composto_seis, (distance,130 + plus))
+        screen.blit(binario_composto_seis, (distance,230 + plus))
+        screen.blit(binario_composto_seis, (distance,330 + plus))
+        screen.blit(binario_composto_seis, (distance,430 + plus))
+        screen.blit(binario_composto_seis, (distance,530 + plus))
         #oito
-        screen.blit(binario_composto_oito, (distance,50))
-        screen.blit(binario_composto_oito, (distance,150))
-        screen.blit(binario_composto_oito, (distance,250))
-        screen.blit(binario_composto_oito, (distance,350))
-        screen.blit(binario_composto_oito, (distance,450))
-        screen.blit(binario_composto_oito, (distance,550))
+        screen.blit(binario_composto_oito, (distance,50 + plus))
+        screen.blit(binario_composto_oito, (distance,150 + plus))
+        screen.blit(binario_composto_oito, (distance,250 + plus))
+        screen.blit(binario_composto_oito, (distance,350 + plus))
+        screen.blit(binario_composto_oito, (distance,450 + plus))
+        screen.blit(binario_composto_oito, (distance,550 + plus))
 
 def draw_sheet():
 #while running:
-    #screen.fill((255,255,225))
     pyg.event.get()
 
     #image settings
@@ -188,82 +206,88 @@ def draw_sheet():
     #image settings
 
     #clef prints
-    screen.blit(g_clef, (0,0))
-    screen.blit(g_clef, (0,100))
-    screen.blit(g_clef, (0,200))
-    screen.blit(g_clef, (0,300))
-    screen.blit(g_clef, (0,400))
-    screen.blit(g_clef, (0,500))
+    screen.blit(g_clef, (0,0 + plus))
+    screen.blit(g_clef, (0,100 + plus))
+    screen.blit(g_clef, (0,200 + plus))
+    screen.blit(g_clef, (0,300 + plus))
+    screen.blit(g_clef, (0,400 + plus))
+    screen.blit(g_clef, (0,500 + plus))
     #clef prints
 
     #pentagrams
-    pyg.draw.line(screen,(0,0,0), (20,20), (880,20), 1)
-    pyg.draw.line(screen,(0,0,0), (20,35), (880,35), 1)
-    pyg.draw.line(screen,(0,0,0), (20,50), (880,50), 1)
-    pyg.draw.line(screen,(0,0,0), (20,65), (880,65), 1)
-    pyg.draw.line(screen,(0,0,0), (20,80), (880,80), 1)
+    pyg.draw.line(screen,(0,0,0), (start,20 + plus), (end,20 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,35 + plus), (end,35 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,50 + plus), (end,50 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,65 + plus), (end,65 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,80 + plus), (end,80 + plus), 1)
 
-    pyg.draw.line(screen,(0,0,0), (20,120), (880,120), 1)
-    pyg.draw.line(screen,(0,0,0), (20,135), (880,135), 1)
-    pyg.draw.line(screen,(0,0,0), (20,150), (880,150), 1)
-    pyg.draw.line(screen,(0,0,0), (20,165), (880,165), 1)
-    pyg.draw.line(screen,(0,0,0), (20,180), (880,180), 1)
+    pyg.draw.line(screen,(0,0,0), (start,120 + plus), (end,120 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,135 + plus), (end,135 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,150 + plus), (end,150 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,165 + plus), (end,165 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,180 + plus), (end,180 + plus), 1)
 
-    pyg.draw.line(screen,(0,0,0), (20,220), (880,220), 1)
-    pyg.draw.line(screen,(0,0,0), (20,235), (880,235), 1)
-    pyg.draw.line(screen,(0,0,0), (20,250), (880,250), 1)
-    pyg.draw.line(screen,(0,0,0), (20,265), (880,265), 1)
-    pyg.draw.line(screen,(0,0,0), (20,280), (880,280), 1)
+    pyg.draw.line(screen,(0,0,0), (start,220 + plus), (end,220 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,235 + plus), (end,235 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,250 + plus), (end,250 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,265 + plus), (end,265 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,280 + plus), (end,280 + plus), 1)
 
-    pyg.draw.line(screen,(0,0,0), (20,320), (880,320), 1)
-    pyg.draw.line(screen,(0,0,0), (20,335), (880,335), 1)
-    pyg.draw.line(screen,(0,0,0), (20,350), (880,350), 1)
-    pyg.draw.line(screen,(0,0,0), (20,365), (880,365), 1)
-    pyg.draw.line(screen,(0,0,0), (20,380), (880,380), 1)
+    pyg.draw.line(screen,(0,0,0), (start,320 + plus), (end,320 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,335 + plus), (end,335 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,350 + plus), (end,350 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,365 + plus), (end,365 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,380 + plus), (end,380 + plus), 1)
 
-    pyg.draw.line(screen,(0,0,0), (20,420), (880,420), 1)
-    pyg.draw.line(screen,(0,0,0), (20,435), (880,435), 1)
-    pyg.draw.line(screen,(0,0,0), (20,450), (880,450), 1)
-    pyg.draw.line(screen,(0,0,0), (20,465), (880,465), 1)
-    pyg.draw.line(screen,(0,0,0), (20,480), (880,480), 1)
+    pyg.draw.line(screen,(0,0,0), (start,420 + plus), (end,420 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,435 + plus), (end,435 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,450 + plus), (end,450 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,465 + plus), (end,465 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,480 + plus), (end,480 + plus), 1)
 
-    pyg.draw.line(screen,(0,0,0), (20,520), (880,520), 1)
-    pyg.draw.line(screen,(0,0,0), (20,535), (880,535), 1)
-    pyg.draw.line(screen,(0,0,0), (20,550), (880,550), 1)
-    pyg.draw.line(screen,(0,0,0), (20,565), (880,565), 1)
-    pyg.draw.line(screen,(0,0,0), (20,580), (880,580), 1)
+    pyg.draw.line(screen,(0,0,0), (start,520 + plus), (end,520 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,535 + plus), (end,535 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,550 + plus), (end,550 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,565 + plus), (end,565 + plus), 1)
+    pyg.draw.line(screen,(0,0,0), (start,580 + plus), (end,580 + plus), 1)
     #pentagrams
 
     #compass lines
-    pyg.draw.line(screen,(0,0,0), (245,20), (245,80), 2)
-    pyg.draw.line(screen,(0,0,0), (450,20), (450,80), 2)
-    pyg.draw.line(screen,(0,0,0), (665,20), (665,80), 2)
-    pyg.draw.line(screen,(0,0,0), (880,20), (880,80), 2)
+    pyg.draw.line(screen,(0,0,0), (285,20 + plus), (285,80 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (523,20 + plus), (523,80 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (761,20 + plus), (761,80 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (999,20 + plus), (999,80 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (1260,20 + plus), (1260,80 + plus), 2)
 
-    pyg.draw.line(screen,(0,0,0), (245,120), (245,180), 2)
-    pyg.draw.line(screen,(0,0,0), (450,120), (450,180), 2)
-    pyg.draw.line(screen,(0,0,0), (665,120), (665,180), 2)
-    pyg.draw.line(screen,(0,0,0), (880,120), (880,180), 2)
+    pyg.draw.line(screen,(0,0,0), (285,120 + plus), (285,180 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (523,120 + plus), (523,180 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (761,120 + plus), (761,180 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (999,120 + plus), (999,180 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (1260,120 + plus), (1260,180 + plus), 2)
 
-    pyg.draw.line(screen,(0,0,0), (245,220), (245,280), 2)
-    pyg.draw.line(screen,(0,0,0), (450,220), (450,280), 2)
-    pyg.draw.line(screen,(0,0,0), (665,220), (665,280), 2)
-    pyg.draw.line(screen,(0,0,0), (880,220), (880,280), 2)
+    pyg.draw.line(screen,(0,0,0), (285,220 + plus), (285,280 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (523,220 + plus), (523,280 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (761,220 + plus), (761,280 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (999,220 + plus), (999,280 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (1260,220 + plus), (1260,280 + plus), 2)
 
-    pyg.draw.line(screen,(0,0,0), (245,320), (245,380), 2)
-    pyg.draw.line(screen,(0,0,0), (450,320), (450,380), 2)
-    pyg.draw.line(screen,(0,0,0), (665,320), (665,380), 2)
-    pyg.draw.line(screen,(0,0,0), (880,320), (880,380), 2)
+    pyg.draw.line(screen,(0,0,0), (285,320 + plus), (285,380 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (523,320 + plus), (523,380 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (761,320 + plus), (761,380 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (999,320 + plus), (999,380 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (1260,320 + plus), (1260,380 + plus), 2)
 
-    pyg.draw.line(screen,(0,0,0), (245,420), (245,480), 2)
-    pyg.draw.line(screen,(0,0,0), (450,420), (450,480), 2)
-    pyg.draw.line(screen,(0,0,0), (665,420), (665,480), 2)
-    pyg.draw.line(screen,(0,0,0), (880,420), (880,480), 2)
+    pyg.draw.line(screen,(0,0,0), (285,420 + plus), (285,480 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (523,420 + plus), (523,480 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (761,420 + plus), (761,480 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (999,420 + plus), (999,480 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (1260,420 + plus), (1260,480 + plus), 2)
 
-    pyg.draw.line(screen,(0,0,0), (245,520), (245,580), 2)
-    pyg.draw.line(screen,(0,0,0), (450,520), (450,580), 2)
-    pyg.draw.line(screen,(0,0,0), (665,520), (665,580), 2)
-    pyg.draw.line(screen,(0,0,0), (880,520), (880,580), 2)
+    pyg.draw.line(screen,(0,0,0), (285,520 + plus), (285,580 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (523,520 + plus), (523,580 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (761,520 + plus), (761,580 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (999,520 + plus), (999,580 + plus), 2)
+    pyg.draw.line(screen,(0,0,0), (1260,520 + plus), (1260,580 + plus), 2)
     #compass lines
 
     #update image
@@ -275,3 +299,5 @@ def draw_sheet():
     #for event in pyg.event.get():
     #    if event.type == pyg.QUIT:
     #        running = False
+
+
