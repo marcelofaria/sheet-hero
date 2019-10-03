@@ -54,7 +54,7 @@ def sheet_hero(compass, clef, tempo, title):
     plt.setp(ax, xticks=[0, CHUNK, 2 * CHUNK], yticks=[0,128,255])
     #---   Spectrum   ---#
     ax2.set_title('Espectro')
-    ax2.set_ylim(0, 0.85) #limite do eixo y
+    ax2.set_ylim(0, 0.9) #limite do eixo y
     ax2.set_xlim(0, 1600) #limite do eixo x
     #plt.setp(ax2, xticks=[500, 1000, 2000, 3000, 4000])
     #ax2.set_xlim(20, RATE/2)
@@ -73,6 +73,7 @@ def sheet_hero(compass, clef, tempo, title):
     note_x            = 0           #
     note_y            = 0           #
     pentagram_control = 1           #
+    nomenclature      = ''          #
     #------------------- VARIABLES DECLARATION -------------------#
 
     #-------------------     MAIN LOOP      -------------------#
@@ -153,6 +154,9 @@ def sheet_hero(compass, clef, tempo, title):
                 maxX = i
             i = i + 1
 
+        print('X: ' + str(maxX))
+        print('Y: ' + str(maxY))
+
         #--- PRINTA O PICO DO ESPECTRO ---#
 
         #ann, = plt.plot(splitedX[maxX], maxY, '*', lw = 1)
@@ -176,7 +180,14 @@ def sheet_hero(compass, clef, tempo, title):
             total_time = time_elapsed - time_start
             if(total_time > 0.19 and total_time < 64):
                 position_y_sheet = rules.return_position_y(note, pentagram_control)
-                note_symbol = rules.note_figure(float(total_time), movement, position_y_sheet, 0.05)
+
+                if(maxY < 0.2):
+                    nomenclature = 'pauses'
+                    position_y_sheet = 37.5
+                else:
+                    nomenclature = 'notes'
+
+                note_symbol = rules.note_figure(float(total_time), movement, position_y_sheet, 0.05, nomenclature)
                 if(note_symbol != 'Fora do tempo'):
                     if(movement >= 1230):
                         movement = 90
@@ -194,9 +205,9 @@ def sheet_hero(compass, clef, tempo, title):
 
         #updates the figure
         try:
-            #fig.canvas.draw()
+            fig.canvas.draw()
             fig.canvas.flush_events()
-            #ann.remove() #erases the wave peak annotation
+            ann.remove() #erases the wave peak annotation
         except TclError:
             break
 

@@ -114,38 +114,67 @@ def define_note(frequency_hz):
     else:
         return ('Fora do limite')
 
-def note_figure(time_elapsed, x, y, resize_multiplier):
-    if (time_elapsed >= 3.8 and time_elapsed <= 4.2):
-        sd.draw_note_figure(m.semibreve, x, y, False, resize_multiplier)
-        return ('SEMIBREVE 𝅝 4 tempos')
-    elif (time_elapsed >= 2.8 and time_elapsed <= 3.2):
-        sd.draw_note_figure(m.minima, x, y, False, resize_multiplier)
-        return ('MINIMA. 𝅗𝅥. 3 tempos')
-    elif (time_elapsed >= 1.8 and time_elapsed <= 2.2):
-        sd.draw_note_figure(m.minima, x, y, False, resize_multiplier)
-        return ('MINIMA 𝅗𝅥 2 tempos')
-    elif (time_elapsed >= 1.3 and time_elapsed <= 1.7):
-        sd.draw_note_figure(m.seminima, x, y, False, resize_multiplier)
-        return ('SEMINIMA. ♩. 1.5 tempos')
-    elif (time_elapsed >= 0.8 and time_elapsed <= 1.2):
-        sd.draw_note_figure(m.seminima, x, y, False, resize_multiplier)
-        return ('SEMINIMA ♩ 1 tempo')
-    elif (time_elapsed >= 0.71 and time_elapsed <= 0.79):
-        sd.draw_note_figure(m.colcheia, x, y, False, resize_multiplier)
-        return ('COLCHEIA. 𝅘𝅥𝅮. 0.75 tempo')
-    elif (time_elapsed >= 0.3 and time_elapsed <= 0.7):
-        sd.draw_note_figure(m.colcheia, x, y, False, resize_multiplier)
-        return ('COLCHEIA 𝅘𝅥𝅮 0.5 tempo')
-    elif (time_elapsed >= 0.2 and time_elapsed <= 0.29):
-        sd.draw_note_figure(m.semicolcheia, x, y, False, resize_multiplier)
-        return ('SEMICOLCHEIA 𝅘𝅥𝅯 0.25 tempo')
-
+def note_figure(time_elapsed, x, y, resize_multiplier, nomenclature):
+    if(nomenclature == 'notes'):
+        if (time_elapsed >= 3.8 and time_elapsed <= 4.2):
+            sd.draw_note_figure(m.semibreve, x, y, False, resize_multiplier)
+            return ('SEMIBREVE 𝅝 4 tempos')
+        elif (time_elapsed >= 2.8 and time_elapsed <= 3.2):
+            sd.draw_note_figure(m.minima, x, y, False, resize_multiplier)
+            return ('MINIMA. 𝅗𝅥. 3 tempos')
+        elif (time_elapsed >= 1.8 and time_elapsed <= 2.2):
+            sd.draw_note_figure(m.minima, x, y, False, resize_multiplier)
+            return ('MINIMA 𝅗𝅥 2 tempos')
+        elif (time_elapsed >= 1.3 and time_elapsed <= 1.7):
+            sd.draw_note_figure(m.seminima, x, y, False, resize_multiplier)
+            return ('SEMINIMA. ♩. 1.5 tempos')
+        elif (time_elapsed >= 0.8 and time_elapsed <= 1.2):
+            sd.draw_note_figure(m.seminima, x, y, False, resize_multiplier)
+            return ('SEMINIMA ♩ 1 tempo')
+        elif (time_elapsed >= 0.71 and time_elapsed <= 0.79):
+            sd.draw_note_figure(m.colcheia, x, y, False, resize_multiplier)
+            return ('COLCHEIA. 𝅘𝅥𝅮. 0.75 tempo')
+        elif (time_elapsed >= 0.3 and time_elapsed <= 0.7):
+            sd.draw_note_figure(m.colcheia, x, y, False, resize_multiplier)
+            return ('COLCHEIA 𝅘𝅥𝅮 0.5 tempo')
+        elif (time_elapsed >= 0.2 and time_elapsed <= 0.29):
+            sd.draw_note_figure(m.semicolcheia, x, y, False, resize_multiplier)
+            return ('SEMICOLCHEIA 𝅘𝅥𝅯 0.25 tempo')
+    elif(nomenclature == 'pauses'):
+        if (time_elapsed >= 3.8 and time_elapsed <= 4.2):
+            sd.draw_note_figure(m.p_semibreve, x, y, False, resize_multiplier)
+            return ('pausa SEMIBREVE 𝅝 4 tempos')
+        elif (time_elapsed >= 2.8 and time_elapsed <= 3.2):
+            sd.draw_note_figure(m.p_minima, x, y, False, resize_multiplier)
+            return ('pausa MINIMA. 𝅗𝅥. 3 tempos')
+        elif (time_elapsed >= 1.8 and time_elapsed <= 2.2):
+            sd.draw_note_figure(m.p_minima, x, y, False, resize_multiplier)
+            return ('pausa MINIMA 𝅗𝅥 2 tempos')
+        elif (time_elapsed >= 1.3 and time_elapsed <= 1.7):
+            sd.draw_note_figure(m.p_seminima, x, y, False, resize_multiplier)
+            return ('pausa SEMINIMA. ♩. 1.5 tempos')
+        elif (time_elapsed >= 0.8 and time_elapsed <= 1.2):
+            sd.draw_note_figure(m.p_seminima, x, y, False, resize_multiplier)
+            return ('pausa SEMINIMA ♩ 1 tempo')
+        elif (time_elapsed >= 0.71 and time_elapsed <= 0.79):
+            sd.draw_note_figure(m.p_colcheia, x, y, False, resize_multiplier)
+            return ('pausa COLCHEIA. 𝅘𝅥𝅮. 0.75 tempo')
+        elif (time_elapsed >= 0.3 and time_elapsed <= 0.7):
+            sd.draw_note_figure(m.p_colcheia, x, y, False, resize_multiplier)
+            return ('pausa COLCHEIA 𝅘𝅥𝅮 0.5 tempo')
+        elif (time_elapsed >= 0.2 and time_elapsed <= 0.29):
+            sd.draw_note_figure(m.p_colcheia, x, y, False, resize_multiplier)
+            return ('pausa SEMICOLCHEIA 0.25 tempo')
     else:
         return('Fora do tempo')
 
 def return_position_y(note, pentagram):
     axis_y_pentagram = 0
-    if(note   == 'Mi5'):
+    if(note   == 'Sol5'):
+        axis_y_pentagram = -24.5
+    elif(note   == 'Fá5'):
+        axis_y_pentagram = -16.5
+    elif(note   == 'Mi5'):
         axis_y_pentagram = -8.5
     elif(note == 'Ré5'):
         axis_y_pentagram = -1.5
@@ -163,6 +192,8 @@ def return_position_y(note, pentagram):
         axis_y_pentagram = 44.5
     elif(note == 'Ré4'):
         axis_y_pentagram = 52.5
+    elif(note == 'Dó4'):
+        axis_y_pentagram = 60.5
     else:
         axis_y_pentagram = -100000000
 
