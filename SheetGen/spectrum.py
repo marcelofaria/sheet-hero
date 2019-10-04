@@ -154,8 +154,8 @@ def sheet_hero(compass, clef, tempo, title):
                 maxX = i
             i = i + 1
 
-        print('X: ' + str(maxX))
-        print('Y: ' + str(maxY))
+        #print('X: ' + str(maxX))
+        #print('Y: ' + str(maxY))
 
         #--- PRINTA O PICO DO ESPECTRO ---#
 
@@ -172,6 +172,18 @@ def sheet_hero(compass, clef, tempo, title):
         sd.draw_tempo(tempo, compass)
         sd.draw_title(title)
 
+        #note               : nota atual
+        #previous_note      : nota anterior
+        #time_start         : inicia a contagem do tempo
+        #time_elapsed       : interrompe a contagem de tempo
+        #total_time         : tempo passado entre mudança de notas
+        #position_y_sheet   : definição da nota no pentagrama
+        #nomenclature       : informa se é uma pausa ou uma nota
+        #meio               : informa se a nota tocada precisa ser somada com colcheia
+        #note_symbol        : controle para não avançar desnecessariamente na partitura
+        #movement           : indice do eixo X para imprimir a nota no pygame
+        #pentagram_control  : guarda o índice do pentagrama atual
+
         if(note == previous_note):
             #print(note + ' ' + previous_note)
             pass
@@ -179,20 +191,31 @@ def sheet_hero(compass, clef, tempo, title):
             time_elapsed = time.time()
             total_time = time_elapsed - time_start
             if(total_time > 0.19 and total_time < 64):
-                position_y_sheet = rules.return_position_y(note, pentagram_control)
+                position_y_sheet = rules.return_position_y(previous_note, pentagram_control)
 
                 if(maxY < 0.2):
                     nomenclature = 'pauses'
-                    position_y_sheet = 37.5
+                    position_y_sheet = rules.return_position_y_pause(pentagram_control)
                 else:
                     nomenclature = 'notes'
 
                 note_symbol = rules.note_figure(float(total_time), movement, position_y_sheet, 0.05, nomenclature)
-                if(note_symbol != 'Fora do tempo'):
+                #meio = str(note_symbol).find('meio')
+
+
+
+
+                if(note_symbol != 0.75 and note_symbol != 0.5 and note_symbol != 0.25 and type(note_symbol) == float):
+                    if(note_symbol != 'Fora do tempo'):
+                        if(movement >= 1230):
+                            movement = 90
+                            pentagram_control += 1
+                        movement += 20
+                else:
                     if(movement >= 1230):
-                        movement = 90
-                        pentagram_control += 1
-                    movement += 20
+                            movement = 90
+                            pentagram_control += 1
+                    movement += 50
                 print(note, "%.2f" % (time_elapsed - time_start))
                 print(note_symbol)
             time_start = time_elapsed
