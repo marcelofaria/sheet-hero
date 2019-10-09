@@ -7,6 +7,7 @@ from tkinter import TclError    #trabalha com exceptions
 import rules                    #meu módulo para definir notas e tempos
 import sheet_draw as sd         #meu módulo para imprimir a partitura
 import time                     #calcula o tempo das notas
+import pygame as pyg
 
 def sheet_hero(compass, clef, tempo, title):
     #------------------- VARIABLES DECLARATION -------------------#
@@ -60,10 +61,10 @@ def sheet_hero(compass, clef, tempo, title):
     #ax2.set_xlim(20, RATE/2)
 
     #shows the user interface of MATPLOTLIB
-    thismanager = plt.get_current_fig_manager()
-    thismanager.window.state('zoomed')
+    #thismanager = plt.get_current_fig_manager()
+    #thismanager.window.state('zoomed')
 
-    plt.show(block=False)
+    #plt.show(block=False)
     #plt.summer()
     #loop utilities
     note              = ''          #initial declaration <> empty
@@ -199,39 +200,40 @@ def sheet_hero(compass, clef, tempo, title):
                 else:
                     nomenclature = 'notes'
 
-                note_symbol = rules.note_figure(float(total_time), movement, position_y_sheet, 0.05, nomenclature)
-                #meio = str(note_symbol).find('meio')
+                if (position_y_sheet != -1):
+                    note_symbol = rules.note_figure(float(total_time), movement, position_y_sheet, 0.05, nomenclature)
+                    #meio = str(note_symbol).find('meio')
 
-
-
-
-                if(note_symbol != 0.75 and note_symbol != 0.5 and note_symbol != 0.25 and type(note_symbol) == float):
-                    if(note_symbol != 'Fora do tempo'):
+                    if(note_symbol != 0.75 and note_symbol != 0.5 and note_symbol != 0.25 and type(note_symbol) == float):
+                        if(note_symbol != 'Fora do tempo'):
+                            if(movement >= 1230):
+                                movement = 90
+                                pentagram_control += 1
+                            movement += 20
+                    else:
                         if(movement >= 1230):
-                            movement = 90
-                            pentagram_control += 1
-                        movement += 20
-                else:
-                    if(movement >= 1230):
-                            movement = 90
-                            pentagram_control += 1
-                    movement += 50
-                print(note, "%.2f" % (time_elapsed - time_start))
-                print(note_symbol)
+                                movement = 90
+                                pentagram_control += 1
+                        movement += 50
+                    print(note, "%.2f" % (time_elapsed - time_start))
+                    print(note_symbol)
             time_start = time_elapsed
 
         previous_note = note
-
-
+        for event in pyg.event.get():
+            if event.type == pyg.QUIT:
+                pyg.quit()
+                exit()
 
         #movement += movement
-
+        #fig.close()
         #updates the figure
-        try:
-            fig.canvas.draw()
-            fig.canvas.flush_events()
-            ann.remove() #erases the wave peak annotation
-        except TclError:
-            break
+        #try:
+
+            #fig.canvas.draw()
+            #fig.canvas.flush_events()
+            #ann.remove() #erases the wave peak annotation
+        #except TclError:
+        #    break
 
     #-------------------     MAIN LOOP      -------------------#

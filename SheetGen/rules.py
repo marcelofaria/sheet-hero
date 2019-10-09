@@ -116,81 +116,102 @@ def define_note(frequency_hz):
         return ('Fora do limite')
 
 def note_figure(time_elapsed, x, y, resize_multiplier, nomenclature):
+    # notas
     if(nomenclature == 'notes'):
+        # 4 tempos semibreve
         if (time_elapsed >= 3.75 and time_elapsed <= 4.25):
             sd.draw_note_figure(m.semibreve, x, y, False, resize_multiplier - 0.025)
             return (4)
+        # 3,5 tempos minima pontuada com colcheia
         elif(time_elapsed >= 3.26 and time_elapsed <= 3.74):
             sd.draw_note_figure(m.minima, x - 15, y, False, resize_multiplier + 0.007)
             sd.draw_note_figure(m.ponto, x + 16, y + 33, False, resize_multiplier - 0.04)
             sd.draw_note_figure(m.colcheia, x + 15, y, False, resize_multiplier)
             sd.draw_note_figure(m.ligature, x + 8, y + 25, False, resize_multiplier - 0.033)
             return(3.5)
+        # 3 tempos minima
         elif (time_elapsed >= 2.75 and time_elapsed <= 3.25):
             sd.draw_note_figure(m.minima, x, y, False, resize_multiplier)
             sd.draw_note_figure(m.ponto, x, y + 3, False, resize_multiplier - 0.04)
             return (3)
+        # 2,5 tempos minima com colcheia
         elif(time_elapsed >= 2.26 and time_elapsed <= 2.74):
-            sd.draw_note_figure(m.minima, x, y, False, resize_multiplier)
-            #sd.draw_note_figure(m.ponto, x, y + 3, False, resize_multiplier)
-            sd.draw_note_figure(m.colcheia, x, y + 5, False, resize_multiplier)
-            sd.draw_note_figure(m.ligature, x + 5, y, False, resize_multiplier - 0.025)
+            sd.draw_note_figure(m.minima, x - 15, y, False, resize_multiplier + 0.007)
+            sd.draw_note_figure(m.colcheia, x + 15, y, False, resize_multiplier)
+            sd.draw_note_figure(m.ligature, x + 8, y + 25, False, resize_multiplier - 0.033)
             return(2.5)
+        # 2 tempos minima
         elif (time_elapsed >= 1.75 and time_elapsed <= 2.25):
             sd.draw_note_figure(m.minima, x, y, False, resize_multiplier)
             return (2)
+        # 1,5 tempos seminima pontuada
         elif (time_elapsed >= 1.25 and time_elapsed <= 1.75):
             sd.draw_note_figure(m.seminima, x, y, False, resize_multiplier)
             sd.draw_note_figure(m.ponto, x, y + 3, False, resize_multiplier - 0.04)
             return (1.5)
+        # 1 tempo seminima
         elif (time_elapsed >= 0.76 and time_elapsed <= 1.24):
             sd.draw_note_figure(m.seminima, x, y, False, resize_multiplier)
             return (1)
+        # 0,75 tempo colcheia pontuada
         elif (time_elapsed >= 0.71 and time_elapsed <= 0.75):
             sd.draw_note_figure(m.colcheia, x, y, False, resize_multiplier)
             sd.draw_note_figure(m.ponto, x, y + 3, False, resize_multiplier - 0.04)
             return (0.75)
+        # 0,5 tempo colcheia
         elif (time_elapsed >= 0.3 and time_elapsed <= 0.70):
             sd.draw_note_figure(m.colcheia, x, y, False, resize_multiplier)
             return (0.5)
+        # 0,25 tempo semicolcheia
         elif (time_elapsed >= 0.2 and time_elapsed <= 0.29):
             sd.draw_note_figure(m.semicolcheia, x, y, False, resize_multiplier)
             return (0.25)
+    # pausas
     elif(nomenclature == 'pauses'):
+        # 4 tempos semibreve
         if (time_elapsed >= 3.75 and time_elapsed <= 4.25):
             sd.draw_note_figure(m.p_semibreve, x, y, False, resize_multiplier - 0.008)
             return (4)
+        # 3,5 tempos minima pontuada com colcheia
         elif(time_elapsed >= 3.26 and time_elapsed <= 3.74):
             sd.draw_note_figure(m.p_minima, x, y, False, resize_multiplier)
             sd.draw_note_figure(m.ponto, x, y + 3, False, resize_multiplier - 0.04)
             sd.draw_note_figure(m.p_colcheia, x, y + 5, False, resize_multiplier)
             return(3.5)
+        # 3 tempos minima
         elif (time_elapsed >= 2.75 and time_elapsed <= 3.25):
             sd.draw_note_figure(m.p_minima, x, y, False, resize_multiplier)
             sd.draw_note_figure(m.ponto, x, y + 3, False, resize_multiplier - 0.04)
             return (3)
+        # 2,5 tempos minima com colcheia
         elif(time_elapsed >= 2.26 and time_elapsed <= 2.74):
             sd.draw_note_figure(m.p_minima, x, y, False, resize_multiplier)
             #sd.draw_note_figure(m.ponto, x, y + 3, False, resize_multiplier)
             sd.draw_note_figure(m.p_colcheia, x, y + 5, False, resize_multiplier)
             return(2.5)
+        # 2 tempos minima
         elif (time_elapsed >= 1.75 and time_elapsed <= 2.25):
             sd.draw_note_figure(m.p_minima, x, y, False, resize_multiplier)
             return (2)
+        # 1,5 tempos seminima pontuada
         elif (time_elapsed >= 1.25 and time_elapsed <= 1.75):
             sd.draw_note_figure(m.p_seminima, x, y, False, resize_multiplier)
             sd.draw_note_figure(m.ponto, x, y + 3, False, resize_multiplier - 0.04)
             return (1.5)
+        # 1 tempo seminima
         elif (time_elapsed >= 0.76 and time_elapsed <= 1.24):
             sd.draw_note_figure(m.p_seminima, x, y, False, resize_multiplier)
             return (1)
+        # 0,75 tempo colcheia pontuada
         elif (time_elapsed >= 0.71 and time_elapsed <= 0.75):
             sd.draw_note_figure(m.p_colcheia, x, y, False, resize_multiplier)
             sd.draw_note_figure(m.ponto, x, y + 3, False, resize_multiplier - 0.04)
             return (0.75)
+        # 0,5 tempo colcheia
         elif (time_elapsed >= 0.3 and time_elapsed <= 0.70):
             sd.draw_note_figure(m.p_colcheia, x, y, False, resize_multiplier)
             return (0.5)
+        # 0,25 tempo semicolcheia
         elif (time_elapsed >= 0.2 and time_elapsed <= 0.29):
             sd.draw_note_figure(m.p_colcheia, x, y, False, resize_multiplier)
             return (0.25)
@@ -214,34 +235,64 @@ def return_position_y_pause(pentagram):
     elif(pentagram == 6):
         axis_y_pentagram += 500
         return axis_y_pentagram
+    elif(pentagram > 7):
+        axis_y_pentagram = -100000000
+        return axis_y_pentagram
     else:
         return axis_y_pentagram
+
 def return_position_y(note, pentagram):
     #axis_y_pentagram = 0
-    if(note   == 'Sol5'):
+    if  (note == 'Si5'):
+        axis_y_pentagram = -40.5
+    elif(note == 'Lá#5'):
+        axis_y_pentagram = -32.5
+    elif(note == 'Lá5'):
+        axis_y_pentagram = -32.5
+    elif(note == 'Sol#5'):
         axis_y_pentagram = -24.5
-    elif(note   == 'Fá5'):
+    elif(note == 'Sol5'):
+        axis_y_pentagram = -24.5
+    elif(note == 'Fá#5'):
         axis_y_pentagram = -16.5
-    elif(note   == 'Mi5'):
+    elif(note == 'Fá5'):
+        axis_y_pentagram = -16.5
+    elif(note == 'Mi5'):
         axis_y_pentagram = -8.5
+    elif(note == 'Ré#5'):
+        axis_y_pentagram = -1.5
     elif(note == 'Ré5'):
         axis_y_pentagram = -1.5
+    elif(note == 'Dó#5'):
+        axis_y_pentagram = 7.5
     elif(note == 'Dó5'):
         axis_y_pentagram = 7.5
     elif(note == 'Si4'):
-        axis_y_pentagram = 14.5
+        axis_y_pentagram = 15.5
+    elif(note == 'Lá#4'):
+        axis_y_pentagram = 23.5
     elif(note == 'Lá4'):
-        axis_y_pentagram = 22.5
+        axis_y_pentagram = 23.5
+    elif(note == 'Sol#4'):
+        axis_y_pentagram = 31.5
     elif(note == 'Sol4'):
-        axis_y_pentagram = 29.5
+        axis_y_pentagram = 31.5
+    elif(note == 'Fá#4'):
+        axis_y_pentagram = 39.5
     elif(note == 'Fá4'):
-        axis_y_pentagram = 37.5
+        axis_y_pentagram = 39.5
     elif(note == 'Mi4'):
-        axis_y_pentagram = 44.5
+        axis_y_pentagram = 47.5
+    elif(note == 'Ré#4'):
+        axis_y_pentagram = 55.5
     elif(note == 'Ré4'):
-        axis_y_pentagram = 52.5
+        axis_y_pentagram = 55.5
+    elif(note == 'Dó#4'):
+        axis_y_pentagram = 63.5
     elif(note == 'Dó4'):
-        axis_y_pentagram = 60.5
+        axis_y_pentagram = 63.5
+    elif(note == 'Si3'):
+        axis_y_pentagram = 70.5
     else:
         axis_y_pentagram = -100000000
 
@@ -260,6 +311,8 @@ def return_position_y(note, pentagram):
     elif(pentagram == 6):
         axis_y_pentagram += 500
         return axis_y_pentagram
+    elif(pentagram > 6):
+        axis_y_pentagram = -1
+        return axis_y_pentagram
     else:
         return axis_y_pentagram
-

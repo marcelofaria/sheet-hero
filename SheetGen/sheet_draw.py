@@ -1,16 +1,21 @@
 import media as m
 import pygame as pyg
 import os
+import time
+import sys
+from fpdf import FPDF
+#from win32api import GetSystemMetrics
 
+pdf = FPDF(orientation = 'L', unit = 'pt', format = (780, 1335))
 pos_x = 1366 / 2 - 1280 / 2
 pos_y = 768 - 720
 os.environ['SDL_VIDEO_WINDOW_POS'] = '%i,%i' % (pos_x,pos_y)
 os.environ['SDL_VIDEO_CENTERED'] = '0'
-#from win32api import GetSystemMetrics
 
 #(width, height) = (int(GetSystemMetrics(0)), int(GetSystemMetrics(1)))
 (width, height) = (1280, 720)
 screen = pyg.display.set_mode((width, height))
+button = pyg.Rect(1200, 50, 100, 50)
 #pyg.transform.smoothscale(screen, (width//10, height//10))
 #sheet color
 screen.fill((255,255,225))
@@ -54,6 +59,21 @@ def draw_note_figure(note_figure, position_x, position_y, increase_point, resize
         #annotate increase point
     #update image
     pyg.display.flip()
+    generate_pdf()
+
+def generate_pdf():
+    for event in pyg.event.get():
+        if event.type == pyg.QUIT:
+            pyg.quit()
+            exit()
+        if event.type == pyg.MOUSEBUTTONDOWN:
+            mouse_pos = event.pos
+            if button.collidepoint(mouse_pos):
+                filename = m.insert_filename('Generated_Sheet')
+                pyg.image.save(screen, filename)
+                pdf.add_page()
+                pdf.image(filename)
+                pdf.output(m.filename_pdf, "F")
 
 def draw_tempo(tempo, compass):
     #60 24
@@ -112,6 +132,7 @@ def draw_tempo(tempo, compass):
         os.environ['SDL_VIDEO_WINDOW_POS'] = '%i,%i' % (pos_x,pos_y)
         os.environ['SDL_VIDEO_CENTERED'] = '0'
 
+        generate_pdf()
 
 def draw_armor_clef(clef):
 
@@ -196,9 +217,31 @@ def draw_armor_compass(compass, distance):
         screen.blit(binario_composto_oito, (distance,450 + plus))
         screen.blit(binario_composto_oito, (distance,550 + plus))
 
+        generate_pdf()
+
+def count_down():
+    i = 1
+    while i > 0:
+
+        time.sleep(1)
+        title_y = 630 - (2 * 10)
+        pyg.font.init() # you have to call this at the start,
+                        # if you want to use this module.
+        my_font = pyg.font.SysFont('Calibri', 50)
+        #my_font.set_bold(True)
+        text_surface = my_font.render(str(i), False, (0, 0, 0))
+        screen.blit(text_surface,(title_y,25))
+        #update image
+        pyg.display.flip()
+        #update image
+        screen.fill((255,255,225))
+        i -= 1
+
 def draw_sheet():
 #while running:
     pyg.event.get()
+
+    pyg.draw.rect(screen, [154, 160, 171], button)
 
     #image settings
     g_clef = pyg.image.load(os.path.join('data', m.g_clef))
@@ -294,10 +337,9 @@ def draw_sheet():
     pyg.display.flip()
     #update image
 
+    #colocar a main dentro desse for e testar se o botão fechar funciona
+    #main dentro de for? é, eu não sei como fazer isso
+
     #exit button does't work without loop ='(
     #so, I'm using no border window
-    #for event in pyg.event.get():
-    #    if event.type == pyg.QUIT:
-    #        running = False
-
-
+    generate_pdf()

@@ -33,3 +33,8 @@ ligature      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\Sheet
 g_clef        = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\media\\g_clef.png'
 #icone do sistema
 ico           = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\media\\colcheia_Vew_icon.ico'
+filename_pdf  = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\sheet\\Gerenated_sheet.pdf'
+
+def insert_filename(name):
+    filename      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\sheet\\' + name + '.png'
+    return filename
