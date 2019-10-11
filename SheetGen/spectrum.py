@@ -21,7 +21,7 @@ def sheet_hero(compass, clef, tempo, title):
     #mono or estereo
     CHANNELS = 1
     #quantity of samples grasp per second(audio quality)
-    RATE     = 44100
+    RATE     = 48000
 
     #two axis matplotlib and figure creation
     fig, (ax, ax2) = plt.subplots(2, figsize=(10,8))
@@ -80,6 +80,9 @@ def sheet_hero(compass, clef, tempo, title):
     #-------------------     MAIN LOOP      -------------------#
 
     while True:
+
+        sd.exit_system()
+        #sd.generate_pdf()
         #retorna o tamanho em bytes da amostra captada
         data = stream.read(CHUNK)
 
@@ -100,6 +103,8 @@ def sheet_hero(compass, clef, tempo, title):
         y_data = line_fft.get_ydata(orig=False)
         xy_data = line_fft.get_xydata()
 
+        sd.exit_system()
+        #sd.generate_pdf()
         #--- CALCULA O PICO DO ESPECTRO ---#
 
         espectroVars = 0
@@ -120,6 +125,8 @@ def sheet_hero(compass, clef, tempo, title):
         odd = 0
         y = 1
 
+        sd.exit_system()
+        #sd.generate_pdf()
         #guarda em even os elementos pares da lista
         while x < len(splited):
             even = str(even) + "," + str(splited[x])
@@ -154,7 +161,8 @@ def sheet_hero(compass, clef, tempo, title):
                 maxY = splitedY[i]
                 maxX = i
             i = i + 1
-
+        sd.exit_system()
+        #sd.generate_pdf()
         #print('X: ' + str(maxX))
         #print('Y: ' + str(maxY))
 
@@ -168,10 +176,12 @@ def sheet_hero(compass, clef, tempo, title):
         note = rules.define_note(splitedX[maxX])
 
         sd.draw_sheet()
+        #sd.generate_pdf()
         distance = sd.draw_armor_clef(clef)
         sd.draw_armor_compass(compass, distance)
         sd.draw_tempo(tempo, compass)
         sd.draw_title(title)
+        sd.exit_system()
 
         #note               : nota atual
         #previous_note      : nota anterior
@@ -185,6 +195,8 @@ def sheet_hero(compass, clef, tempo, title):
         #movement           : indice do eixo X para imprimir a nota no pygame
         #pentagram_control  : guarda o índice do pentagrama atual
 
+        sd.exit_system()
+        #sd.generate_pdf()
         if(note == previous_note):
             #print(note + ' ' + previous_note)
             pass
@@ -220,11 +232,8 @@ def sheet_hero(compass, clef, tempo, title):
             time_start = time_elapsed
 
         previous_note = note
-        for event in pyg.event.get():
-            if event.type == pyg.QUIT:
-                pyg.quit()
-                exit()
-
+        sd.exit_system()
+        #sd.generate_pdf()
         #movement += movement
         #fig.close()
         #updates the figure

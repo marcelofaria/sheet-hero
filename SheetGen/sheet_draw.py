@@ -1,12 +1,13 @@
 import media as m
 import pygame as pyg
+import confirmation_box as cb
 import os
 import time
-import sys
 from fpdf import FPDF
 #from win32api import GetSystemMetrics
 
-pdf = FPDF(orientation = 'L', unit = 'pt', format = (780, 1335))
+#(1335, 765)
+pdf = FPDF(orientation = 'L', unit = 'pt', format = (806,1335))
 pos_x = 1366 / 2 - 1280 / 2
 pos_y = 768 - 720
 os.environ['SDL_VIDEO_WINDOW_POS'] = '%i,%i' % (pos_x,pos_y)
@@ -15,10 +16,10 @@ os.environ['SDL_VIDEO_CENTERED'] = '0'
 #(width, height) = (int(GetSystemMetrics(0)), int(GetSystemMetrics(1)))
 (width, height) = (1280, 720)
 screen = pyg.display.set_mode((width, height))
-button = pyg.Rect(1200, 50, 100, 50)
+button = pyg.Rect(1200, 10, 75, 90)
 #pyg.transform.smoothscale(screen, (width//10, height//10))
 #sheet color
-screen.fill((255,255,225))
+screen.fill((255,255,255))
 
 icon = pyg.image.load(m.ico)
 
@@ -42,6 +43,8 @@ def draw_title(title):
     #my_font.set_bold(True)
     text_surface = my_font.render(title, False, (0, 0, 0))
     screen.blit(text_surface,(title_y,25))
+    exit_system()
+    #generate_pdf()
 
 def draw_note_figure(note_figure, position_x, position_y, increase_point, resize_multiplier):
     #annotate the new note played
@@ -56,24 +59,31 @@ def draw_note_figure(note_figure, position_x, position_y, increase_point, resize
         note_figure = pyg.image.load(os.path.join('data', note_figure))
         note_figure = pyg.transform.rotozoom(note_figure, 0, resize_multiplier)
         screen.blit(note_figure, (position_x, position_y + plus))
+        exit_system()
+        #generate_pdf()
         #annotate increase point
     #update image
     pyg.display.flip()
-    generate_pdf()
+    #generate_pdf()
+    exit_system()
 
-def generate_pdf():
+def exit_system():
     for event in pyg.event.get():
         if event.type == pyg.QUIT:
             pyg.quit()
             exit()
-        if event.type == pyg.MOUSEBUTTONDOWN:
+        elif event.type == pyg.MOUSEBUTTONDOWN:
             mouse_pos = event.pos
             if button.collidepoint(mouse_pos):
-                filename = m.insert_filename('Generated_Sheet')
-                pyg.image.save(screen, filename)
-                pdf.add_page()
-                pdf.image(filename)
-                pdf.output(m.filename_pdf, "F")
+                pyg.image.save(screen, m.filename_png)
+                pyg.quit()
+                cb.confirmation_box()
+
+
+def generate_pdf():
+    pdf.add_page()
+    pdf.image(m.filename_png, w = 1280, h = 720, type = 'PNG')
+    pdf.output(m.filename_pdf, 'F')
 
 def draw_tempo(tempo, compass):
     #60 24
@@ -86,6 +96,9 @@ def draw_tempo(tempo, compass):
 
         screen.blit(smn, (90,0 + plus))
 
+        exit_system()
+        #generate_pdf()
+
     elif(compass == 2):
         smn = pyg.image.load(os.path.join('data', m.seminima))
         smn = pyg.transform.rotozoom(smn, 0, 0.02)
@@ -95,8 +108,12 @@ def draw_tempo(tempo, compass):
 
         screen.blit(smn, (85,0 + plus))
         screen.blit(dot, (97,11 + plus))
+        exit_system()
+        #generate_pdf()
 
     else:
+        exit_system()
+        #generate_pdf()
         pass
 
     if(tempo == 24):
@@ -109,6 +126,9 @@ def draw_tempo(tempo, compass):
         screen.blit(six_print, (103,3 + plus))
         screen.blit(zero_print, (110,3 + plus))
 
+        exit_system()
+        #generate_pdf()
+
     elif(tempo == 25):
         seven_print = pyg.image.load(os.path.join('data', m.seven))
         seven_print = pyg.transform.rotozoom(seven_print, 0, 0.025)
@@ -118,6 +138,9 @@ def draw_tempo(tempo, compass):
 
         screen.blit(seven_print, (103,3 + plus))
         screen.blit(five_print,  (110,3 + plus))
+
+        exit_system()
+        #generate_pdf()
 
     elif(tempo == 26):
         nine_print = pyg.image.load(os.path.join('data', m.nine))
@@ -132,7 +155,8 @@ def draw_tempo(tempo, compass):
         os.environ['SDL_VIDEO_WINDOW_POS'] = '%i,%i' % (pos_x,pos_y)
         os.environ['SDL_VIDEO_CENTERED'] = '0'
 
-        generate_pdf()
+        exit_system()
+        #generate_pdf()
 
 def draw_armor_clef(clef):
 
@@ -141,6 +165,8 @@ def draw_armor_clef(clef):
     #Fá  6
 
     if(clef == 3):
+        exit_system()
+        #generate_pdf()
         return 45
 
     elif(clef == 7):
@@ -154,6 +180,8 @@ def draw_armor_clef(clef):
         screen.blit(g_major, (63,409 + plus))
         screen.blit(g_major, (63,509 + plus))
 
+        exit_system()
+        #generate_pdf()
         return 63
     elif(clef == 6):
         g_major = pyg.image.load(os.path.join('data', m.flat))
@@ -166,6 +194,8 @@ def draw_armor_clef(clef):
         screen.blit(g_major, (60,431 + plus))
         screen.blit(g_major, (60,531 + plus))
 
+        exit_system()
+        #generate_pdf()
         return 60
 
 def draw_armor_compass(compass, distance):
@@ -195,6 +225,9 @@ def draw_armor_compass(compass, distance):
         screen.blit(quaternario, (distance,450 + plus))
         screen.blit(quaternario, (distance,550 + plus))
 
+        exit_system()
+        #generate_pdf()
+
     elif(compass == 2):
 
         binario_composto_seis = pyg.image.load(os.path.join('data', m.six))
@@ -217,10 +250,11 @@ def draw_armor_compass(compass, distance):
         screen.blit(binario_composto_oito, (distance,450 + plus))
         screen.blit(binario_composto_oito, (distance,550 + plus))
 
-        generate_pdf()
+        exit_system()
+        #generate_pdf()
 
 def count_down():
-    i = 1
+    i = 2
     while i > 0:
 
         time.sleep(1)
@@ -234,14 +268,19 @@ def count_down():
         #update image
         pyg.display.flip()
         #update image
-        screen.fill((255,255,225))
+        screen.fill((255,255,255))
         i -= 1
 
 def draw_sheet():
 #while running:
     pyg.event.get()
 
-    pyg.draw.rect(screen, [154, 160, 171], button)
+    pyg.draw.rect(screen, [255, 255, 248], button)
+
+    pdf_ico = pyg.image.load(os.path.join('data', m.pdf_png))
+    pdf_ico = pyg.transform.rotozoom(pdf_ico, 0, 0.25)
+    screen.blit(pdf_ico, (1206, 19))
+
 
     #image settings
     g_clef = pyg.image.load(os.path.join('data', m.g_clef))
@@ -256,6 +295,9 @@ def draw_sheet():
     screen.blit(g_clef, (0,400 + plus))
     screen.blit(g_clef, (0,500 + plus))
     #clef prints
+
+    exit_system()
+    #generate_pdf()
 
     #pentagrams
     pyg.draw.line(screen,(0,0,0), (start,20 + plus), (end,20 + plus), 1)
@@ -295,6 +337,9 @@ def draw_sheet():
     pyg.draw.line(screen,(0,0,0), (start,580 + plus), (end,580 + plus), 1)
     #pentagrams
 
+    exit_system()
+    #generate_pdf()
+
     #compass lines
     pyg.draw.line(screen,(0,0,0), (285,20 + plus), (285,80 + plus), 2)
     pyg.draw.line(screen,(0,0,0), (523,20 + plus), (523,80 + plus), 2)
@@ -333,13 +378,8 @@ def draw_sheet():
     pyg.draw.line(screen,(0,0,0), (1260,520 + plus), (1260,580 + plus), 2)
     #compass lines
 
+    exit_system()
+    #generate_pdf()
     #update image
     pyg.display.flip()
     #update image
-
-    #colocar a main dentro desse for e testar se o botão fechar funciona
-    #main dentro de for? é, eu não sei como fazer isso
-
-    #exit button does't work without loop ='(
-    #so, I'm using no border window
-    generate_pdf()
