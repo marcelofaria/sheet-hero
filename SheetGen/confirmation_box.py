@@ -4,6 +4,7 @@ import pygame as pyg
 import sheet_draw as sd
 import media as m
 import time
+import sys
 
 def confirmation_box():
     root = Tk()
@@ -87,15 +88,12 @@ def confirmation_box():
         root.update_idletasks()
         time.sleep(0.1)
         progress['value']=100
-        #pyg.quit()
-        exit()
+
+        quit()
 
 
     def no():
-        #pyg.quit()
-        exit()
-
-
+        raise SystemExit()
 
     root.msg = Label(root.A, text = 'Você quer salvar a partitura?')
     #msg['font']  = ('Calibri', '10')

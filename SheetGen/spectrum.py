@@ -210,7 +210,13 @@ def sheet_hero(compass, clef, tempo, title):
                     nomenclature = 'pauses'
                     position_y_sheet = rules.return_position_y_pause(pentagram_control)
                 else:
-                    nomenclature = 'notes'
+                    aux_y = position_y_sheet
+                    while aux_y > 14.5  :
+                        aux_y -= 100
+                    if(aux_y < 14.5 and aux_y > -32):
+                        nomenclature = 'not_notes'
+                    else:
+                        nomenclature = 'notes'
 
                 if (position_y_sheet != -1):
                     note_symbol = rules.note_figure(float(total_time), movement, position_y_sheet, 0.05, nomenclature)
@@ -218,15 +224,15 @@ def sheet_hero(compass, clef, tempo, title):
 
                     if(note_symbol != 0.75 and note_symbol != 0.5 and note_symbol != 0.25 and type(note_symbol) == float):
                         if(note_symbol != 'Fora do tempo'):
-                            if(movement >= 1230):
+                            if(movement >= 1220):
                                 movement = 90
                                 pentagram_control += 1
-                            movement += 20
+                            movement += 55
                     else:
                         if(movement >= 1230):
                                 movement = 90
                                 pentagram_control += 1
-                        movement += 50
+                        movement += 40
                     print(note, "%.2f" % (time_elapsed - time_start))
                     print(note_symbol)
             time_start = time_elapsed

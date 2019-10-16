@@ -254,17 +254,21 @@ def draw_armor_compass(compass, distance):
         #generate_pdf()
 
 def count_down():
-    i = 1
+    i = 5
     while i > 0:
 
         time.sleep(1)
-        title_y = 630 - (2 * 10)
+        title_x = 630 - (2 * 10)
         pyg.font.init() # you have to call this at the start,
                         # if you want to use this module.
         my_font = pyg.font.SysFont('Calibri', 50)
         #my_font.set_bold(True)
-        text_surface = my_font.render(str(i), False, (0, 0, 0))
-        screen.blit(text_surface,(title_y,25))
+        if(i == 1):
+            text_surface = my_font.render('Toque!', False, (0, 0, 0))
+            screen.blit(text_surface,(title_x - 50,25))
+        else:
+            text_surface = my_font.render(str(i), False, (0, 0, 0))
+            screen.blit(text_surface,(title_x,25))
         #update image
         pyg.display.flip()
         #update image
