@@ -254,7 +254,7 @@ def draw_armor_compass(compass, distance):
         #generate_pdf()
 
 def count_down():
-    i = 2
+    i = 1
     while i > 0:
 
         time.sleep(1)

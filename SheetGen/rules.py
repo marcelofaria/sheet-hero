@@ -160,7 +160,7 @@ def note_figure(time_elapsed, x, y, resize_multiplier, nomenclature):
             return (0.75)
         # 0,5 tempo colcheia
         elif (time_elapsed >= 0.3 and time_elapsed <= 0.70):
-            sd.draw_note_figure(m.colcheia, x, y, False, resize_multiplier)
+            sd.draw_note_figure(m.semibreve, x, y + 23, False, resize_multiplier - 0.025)
             return (0.5)
         # 0,25 tempo semicolcheia
         elif (time_elapsed >= 0.2 and time_elapsed <= 0.29):
@@ -244,11 +244,11 @@ def return_position_y_pause(pentagram):
 def return_position_y(note, pentagram):
     #axis_y_pentagram = 0
     if  (note == 'Si5'):
-        axis_y_pentagram = -40.5
+        axis_y_pentagram = -39.5
     elif(note == 'Lá#5'):
-        axis_y_pentagram = -32.5
+        axis_y_pentagram = -31.5
     elif(note == 'Lá5'):
-        axis_y_pentagram = -32.5
+        axis_y_pentagram = -31.5
     elif(note == 'Sol#5'):
         axis_y_pentagram = -24.5
     elif(note == 'Sol5'):
@@ -268,31 +268,31 @@ def return_position_y(note, pentagram):
     elif(note == 'Dó5'):
         axis_y_pentagram = 7.5
     elif(note == 'Si4'):
-        axis_y_pentagram = 15.5
+        axis_y_pentagram = 14.5
     elif(note == 'Lá#4'):
-        axis_y_pentagram = 23.5
+        axis_y_pentagram = 22.5
     elif(note == 'Lá4'):
-        axis_y_pentagram = 23.5
+        axis_y_pentagram = 22.5
     elif(note == 'Sol#4'):
-        axis_y_pentagram = 31.5
+        axis_y_pentagram = 29.5
     elif(note == 'Sol4'):
-        axis_y_pentagram = 31.5
+        axis_y_pentagram = 29.5
     elif(note == 'Fá#4'):
-        axis_y_pentagram = 39.5
+        axis_y_pentagram = 37.5
     elif(note == 'Fá4'):
-        axis_y_pentagram = 39.5
+        axis_y_pentagram = 37.5
     elif(note == 'Mi4'):
-        axis_y_pentagram = 47.5
+        axis_y_pentagram = 44.5
     elif(note == 'Ré#4'):
-        axis_y_pentagram = 55.5
+        axis_y_pentagram = 52.5
     elif(note == 'Ré4'):
-        axis_y_pentagram = 55.5
+        axis_y_pentagram = 52.5
     elif(note == 'Dó#4'):
-        axis_y_pentagram = 63.5
+        axis_y_pentagram = 60.5
     elif(note == 'Dó4'):
-        axis_y_pentagram = 63.5
+        axis_y_pentagram = 60.5
     elif(note == 'Si3'):
-        axis_y_pentagram = 70.5
+        axis_y_pentagram = 67.5
     else:
         axis_y_pentagram = -100000000
 
