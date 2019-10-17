@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="490dd0ed-b2a4-47c0-b768-7a7dde7f2399" name="Default Changelist" comment="added some improvements and sheetDraw.py">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/confirmation_box.py" beforeDir="false" afterPath="$PROJECT_DIR$/confirmation_box.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media.py" beforeDir="false" afterPath="$PROJECT_DIR$/media.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/!colcheia.png" beforeDir="false" afterPath="$PROJECT_DIR$/media/!colcheia.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rules.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sheet/Gerenated_sheet.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/sheet/Gerenated_sheet.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sheet_draw.py" beforeDir="false" afterPath="$PROJECT_DIR$/sheet_draw.py" afterDir="false" />
@@ -18,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spectrum.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="215" column="50" selection-start-line="215" selection-start-column="50" selection-end-line="215" selection-end-column="50" />
+            <state relative-caret-position="310">
+              <caret line="229" column="90" lean-forward="true" selection-start-line="229" selection-start-column="90" selection-end-line="229" selection-end-column="90" />
               <folding>
                 <element signature="e#0#61#0" expanded="true" />
               </folding>
@@ -33,10 +33,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sheet_draw.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="267" column="49" selection-start-line="267" selection-start-column="49" selection-end-line="267" selection-end-column="49" />
+            <state relative-caret-position="678">
+              <caret line="196" column="23" lean-forward="true" selection-start-line="196" selection-start-column="23" selection-end-line="196" selection-end-column="23" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
+                <element signature="e#819#1235#0" />
+                <element signature="e#1335#2062#0" />
+                <element signature="e#2087#2442#0" />
+                <element signature="e#2469#2582#0" />
+                <element signature="e#2620#4739#0" />
+                <element signature="e#5906#8074#0" />
+                <element signature="e#8098#8778#0" />
+                <element signature="e#8798#14159#0" />
               </folding>
             </state>
           </provider>
@@ -45,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sheet_hero.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1513">
-              <caret line="89" column="17" selection-start-line="89" selection-start-column="17" selection-end-line="89" selection-end-column="17" />
+            <state relative-caret-position="663">
+              <caret line="39" column="12" lean-forward="true" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -57,7 +65,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/confirmation_box.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
+            <state relative-caret-position="1615">
               <caret line="95" column="14" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -66,13 +74,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rules.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="124" column="54" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
+            <state relative-caret-position="78">
+              <caret line="185" column="24" lean-forward="true" selection-start-line="185" selection-start-column="24" selection-end-line="185" selection-end-column="24" />
               <folding>
                 <element signature="e#0#69#0" expanded="true" />
+                <element signature="e#154#5146#0" />
+                <element signature="e#5195#5385#0" />
+                <element signature="e#13893#14503#0" />
+                <element signature="e#14549#16535#0" />
               </folding>
             </state>
           </provider>
@@ -81,7 +93,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/media.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="694">
+            <state relative-caret-position="489">
               <caret line="42" column="103" selection-start-line="42" selection-start-column="103" selection-end-line="42" selection-end-column="103" />
             </state>
           </provider>
@@ -146,9 +158,9 @@
         <option value="$PROJECT_DIR$/initial_settings_gui.py" />
         <option value="$PROJECT_DIR$/confirmation_box.py" />
         <option value="$PROJECT_DIR$/media.py" />
+        <option value="$PROJECT_DIR$/sheet_draw.py" />
         <option value="$PROJECT_DIR$/spectrum.py" />
         <option value="$PROJECT_DIR$/rules.py" />
-        <option value="$PROJECT_DIR$/sheet_draw.py" />
       </list>
     </option>
   </component>
@@ -372,7 +384,7 @@
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32850242" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.75446427" weight="0.080515295" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7537202" weight="0.080515295" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.90699404" weight="0.39613527" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -380,7 +392,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49925596" weight="0.048309177" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3252818" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.24553572" side_tool="true" visible="true" weight="0.080515295" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.24627976" side_tool="true" weight="0.080515295" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.3268921" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -495,19 +507,16 @@
     <entry file="file://$PROJECT_DIR$/trash/setup.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/sheet_hero.py">
+    <entry file="file://$PROJECT_DIR$/media.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1513">
-          <caret line="89" column="17" selection-start-line="89" selection-start-column="17" selection-end-line="89" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="489">
+          <caret line="42" column="103" selection-start-line="42" selection-start-column="103" selection-end-line="42" selection-end-column="103" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/confirmation_box.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
+        <state relative-caret-position="1615">
           <caret line="95" column="14" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -515,39 +524,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media.py">
+    <entry file="file://$PROJECT_DIR$/sheet_hero.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="694">
-          <caret line="42" column="103" selection-start-line="42" selection-start-column="103" selection-end-line="42" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rules.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="124" column="54" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
+        <state relative-caret-position="663">
+          <caret line="39" column="12" lean-forward="true" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
           <folding>
-            <element signature="e#0#69#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sheet_draw.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="267" column="49" selection-start-line="267" selection-start-column="49" selection-end-line="267" selection-end-column="49" />
+        <state relative-caret-position="678">
+          <caret line="196" column="23" lean-forward="true" selection-start-line="196" selection-start-column="23" selection-end-line="196" selection-end-column="23" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
+            <element signature="e#819#1235#0" />
+            <element signature="e#1335#2062#0" />
+            <element signature="e#2087#2442#0" />
+            <element signature="e#2469#2582#0" />
+            <element signature="e#2620#4739#0" />
+            <element signature="e#5906#8074#0" />
+            <element signature="e#8098#8778#0" />
+            <element signature="e#8798#14159#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spectrum.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="215" column="50" selection-start-line="215" selection-start-column="50" selection-end-line="215" selection-end-column="50" />
+        <state relative-caret-position="310">
+          <caret line="229" column="90" lean-forward="true" selection-start-line="229" selection-start-column="90" selection-end-line="229" selection-end-column="90" />
           <folding>
             <element signature="e#0#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rules.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="185" column="24" lean-forward="true" selection-start-line="185" selection-start-column="24" selection-end-line="185" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#69#0" expanded="true" />
+            <element signature="e#154#5146#0" />
+            <element signature="e#5195#5385#0" />
+            <element signature="e#13893#14503#0" />
+            <element signature="e#14549#16535#0" />
           </folding>
         </state>
       </provider>

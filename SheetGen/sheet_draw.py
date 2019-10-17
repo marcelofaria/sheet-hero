@@ -79,7 +79,6 @@ def exit_system():
                 pyg.quit()
                 cb.confirmation_box()
 
-
 def generate_pdf():
     pdf.add_page()
     pdf.image(m.filename_png, w = 1280, h = 720, type = 'PNG')
@@ -184,15 +183,15 @@ def draw_armor_clef(clef):
         #generate_pdf()
         return 63
     elif(clef == 6):
-        g_major = pyg.image.load(os.path.join('data', m.flat))
-        g_major = pyg.transform.rotozoom(g_major, 0, 0.035)
+        f_major = pyg.image.load(os.path.join('data', m.flat))
+        f_major = pyg.transform.rotozoom(f_major, 0, 0.035)
 
-        screen.blit(g_major, (60,31 + plus))
-        screen.blit(g_major, (60,131 + plus))
-        screen.blit(g_major, (60,231 + plus))
-        screen.blit(g_major, (60,331 + plus))
-        screen.blit(g_major, (60,431 + plus))
-        screen.blit(g_major, (60,531 + plus))
+        screen.blit(f_major, (60,31 + plus))
+        screen.blit(f_major, (60,131 + plus))
+        screen.blit(f_major, (60,231 + plus))
+        screen.blit(f_major, (60,331 + plus))
+        screen.blit(f_major, (60,431 + plus))
+        screen.blit(f_major, (60,531 + plus))
 
         exit_system()
         #generate_pdf()

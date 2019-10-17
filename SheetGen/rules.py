@@ -115,35 +115,44 @@ def define_note(frequency_hz):
     else:
         return ('Fora do limite')
 
+def sharps_and_flats(sharp_or_flat, x, y):
+    if sharp_or_flat == 'sharp':
+        sd.draw_note_figure(m.sharp, x - 8, y + 25, False, 0.035)
+        print('dentro do sharp')
+    elif sharp_or_flat == 'flat':
+        sd.draw_note_figure(m.flat, x, y, False, 0.035)
+    else:
+        pass
+
 def note_figure(time_elapsed, x, y, resize_multiplier, nomenclature):
     # notas
     if(nomenclature == 'not_notes'):
         aux_y = y
         while aux_y > 61:
             aux_y -= 100
-        if(aux_y > 60 or aux_y < -30):
-             sd.draw_note_figure(m.line, x + 4, y + 37, False, resize_multiplier + 1.1)
+        if (aux_y > 60 or aux_y < -30):
+             sd.draw_note_figure(m.line, x + 9, y + 37, False, resize_multiplier + 1.7)
          # 4 tempos semibreve
         if (time_elapsed >= 3.75 and time_elapsed <= 4.25):
-            sd.draw_note_figure(m.semibreve, x, y + 26, False, resize_multiplier - 0.025)
+            sd.draw_note_figure(m.semibreve, x + 15, y + 26, False, resize_multiplier - 0.025)
             return (4)
         # 3,5 tempos minima pontuada com colcheia
         elif(time_elapsed >= 3.26 and time_elapsed <= 3.74):
-            sd.draw_note_figure(m.not_minima, x - 15, y + 31, False, resize_multiplier)
-            sd.draw_note_figure(m.ponto, x + 16, y + 62, False, resize_multiplier - 0.04)
-            sd.draw_note_figure(m.not_colcheia, x + 47, y, False, resize_multiplier)
-            sd.draw_note_figure(m.ligature, x + 8, y + 55, False, resize_multiplier - 0.033)
+            sd.draw_note_figure(m.not_minima, x - 3, y + 31, False, resize_multiplier)
+            sd.draw_note_figure(m.ponto, x + 23, y + 31, False, resize_multiplier - 0.04)
+            sd.draw_note_figure(m.not_colcheia, x + 8, y + 31, False, resize_multiplier)
+            sd.draw_note_figure(m.ligature, x + 10, y + 23, False, resize_multiplier - 0.033)
             return(3.5)
         # 3 tempos minima pontuada
         elif (time_elapsed >= 2.75 and time_elapsed <= 3.25):
             sd.draw_note_figure(m.not_minima, x, y + 31, False, resize_multiplier)
-            sd.draw_note_figure(m.ponto, x + 33, y + 62, False, resize_multiplier - 0.04)
+            sd.draw_note_figure(m.ponto, x + 30, y + 31, False, resize_multiplier - 0.04)
             return (3)
         # 2,5 tempos minima com colcheia
         elif(time_elapsed >= 2.26 and time_elapsed <= 2.74):
-            sd.draw_note_figure(m.not_minima, x - 15, y + 31, False, resize_multiplier)
-            sd.draw_note_figure(m.not_colcheia, x + 47, y, False, resize_multiplier)
-            sd.draw_note_figure(m.ligature, x + 8, y + 55, False, resize_multiplier - 0.033)
+            sd.draw_note_figure(m.not_minima, x - 3, y + 31, False, resize_multiplier)
+            sd.draw_note_figure(m.not_colcheia, x + 8, y + 31, False, resize_multiplier)
+            sd.draw_note_figure(m.ligature, x + 10, y + 23, False, resize_multiplier - 0.033)
             return(2.5)
         # 2 tempos minima
         elif (time_elapsed >= 1.75 and time_elapsed <= 2.25):
@@ -152,7 +161,7 @@ def note_figure(time_elapsed, x, y, resize_multiplier, nomenclature):
         # 1,5 tempos seminima pontuada
         elif (time_elapsed >= 1.25 and time_elapsed <= 1.75):
             sd.draw_note_figure(m.not_seminima, x, y + 31, False, resize_multiplier)
-            sd.draw_note_figure(m.ponto, x + 29, y + 62, False, resize_multiplier - 0.04)
+            sd.draw_note_figure(m.ponto, x + 29, y + 31, False, resize_multiplier - 0.04)
             return (1.5)
         # 1 tempo seminima
         elif (time_elapsed >= 0.76 and time_elapsed <= 1.24):
@@ -160,44 +169,44 @@ def note_figure(time_elapsed, x, y, resize_multiplier, nomenclature):
             return (1)
         # 0,75 tempo colcheia pontuada
         elif (time_elapsed >= 0.71 and time_elapsed <= 0.75):
-            sd.draw_note_figure(m.not_colcheia, x, y + 29, False, resize_multiplier)
-            sd.draw_note_figure(m.ponto, x + 29, y + 62, False, resize_multiplier - 0.04)
+            sd.draw_note_figure(m.not_colcheia, x, y + 31, False, resize_multiplier)
+            sd.draw_note_figure(m.ponto, x + 29, y + 31, False, resize_multiplier - 0.04)
             return (0.75)
         # 0,5 tempo colcheia
         elif (time_elapsed >= 0.3 and time_elapsed <= 0.70):
-            sd.draw_note_figure(m.not_colcheia, x, y + 29, False, resize_multiplier)
+            sd.draw_note_figure(m.not_colcheia, x, y + 31, False, resize_multiplier)
             return (0.5)
         # 0,25 tempo semicolcheia
         elif (time_elapsed >= 0.2 and time_elapsed <= 0.29):
-            sd.draw_note_figure(m.not_semicolcheia, x, y + 29, False, resize_multiplier)
+            sd.draw_note_figure(m.not_semicolcheia, x, y + 31, False, resize_multiplier)
             return (0.25)
     if(nomenclature == 'notes'):
         aux_y = y
         while aux_y > 61:
             aux_y -= 100
         if(aux_y > 60 or aux_y < -30):
-             sd.draw_note_figure(m.line, x + 4, y + 37, False, resize_multiplier + 1.1)
+             sd.draw_note_figure(m.line, x + 4, y + 36, False, resize_multiplier + 1.7)
          # 4 tempos semibreve
         if (time_elapsed >= 3.75 and time_elapsed <= 4.25):
-            sd.draw_note_figure(m.semibreve, x, y + 26, False, resize_multiplier - 0.025)
+            sd.draw_note_figure(m.semibreve, x + 15, y + 26, False, resize_multiplier - 0.025)
             return (4)
         # 3,5 tempos minima pontuada com colcheia
         elif(time_elapsed >= 3.26 and time_elapsed <= 3.74):
-            sd.draw_note_figure(m.minima, x - 15, y + 2, False, resize_multiplier)
-            sd.draw_note_figure(m.ponto, x + 16, y + 33, False, resize_multiplier - 0.04)
-            sd.draw_note_figure(m.colcheia, x + 15, y, False, resize_multiplier)
-            sd.draw_note_figure(m.ligature, x + 8, y + 25, False, resize_multiplier - 0.033)
+            sd.draw_note_figure(m.minima, x - 7, y + 2, False, resize_multiplier)
+            sd.draw_note_figure(m.ponto, x + 21, y + 30, False, resize_multiplier - 0.04)
+            sd.draw_note_figure(m.colcheia, x + 18, y, False, resize_multiplier)
+            sd.draw_note_figure(m.ligature, x + 10, y + 25, False, resize_multiplier - 0.033)
             return(3.5)
         # 3 tempos minima pontuada
         elif (time_elapsed >= 2.75 and time_elapsed <= 3.25):
             sd.draw_note_figure(m.minima, x, y + 2, False, resize_multiplier)
-            sd.draw_note_figure(m.ponto, x + 33, y + 33, False, resize_multiplier - 0.04)
+            sd.draw_note_figure(m.ponto, x + 30, y + 33, False, resize_multiplier - 0.04)
             return (3)
         # 2,5 tempos minima com colcheia
         elif(time_elapsed >= 2.26 and time_elapsed <= 2.74):
-            sd.draw_note_figure(m.minima, x - 15, y + 2, False, resize_multiplier)
-            sd.draw_note_figure(m.colcheia, x + 15, y, False, resize_multiplier)
-            sd.draw_note_figure(m.ligature, x + 8, y + 25, False, resize_multiplier - 0.033)
+            sd.draw_note_figure(m.minima, x - 11, y + 2, False, resize_multiplier)
+            sd.draw_note_figure(m.colcheia, x + 16, y, False, resize_multiplier)
+            sd.draw_note_figure(m.ligature, x + 10, y + 25, False, resize_multiplier - 0.033)
             return(2.5)
         # 2 tempos minima
         elif (time_elapsed >= 1.75 and time_elapsed <= 2.25):
@@ -215,7 +224,7 @@ def note_figure(time_elapsed, x, y, resize_multiplier, nomenclature):
         # 0,75 tempo colcheia pontuada
         elif (time_elapsed >= 0.71 and time_elapsed <= 0.75):
             sd.draw_note_figure(m.colcheia, x, y, False, resize_multiplier)
-            sd.draw_note_figure(m.ponto, x + 29, y + 33, False, resize_multiplier - 0.04)
+            sd.draw_note_figure(m.ponto, x + 29, y + 31, False, resize_multiplier - 0.04)
             return (0.75)
         # 0,5 tempo colcheia
         elif (time_elapsed >= 0.3 and time_elapsed <= 0.70):
