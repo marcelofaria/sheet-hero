@@ -1,7 +1,6 @@
 from tkinter import *
 import spectrum as sp
 import media as m
-import sheet_draw as sd
 
 root = Tk()
 root.title('Sheet Hero')
@@ -34,7 +33,6 @@ def get_values():
     #print(title)
     root.ok['command'] = root.destroy
     root.ok.invoke()
-    sd.count_down()
     sp.sheet_hero(compass, clef, tempo, title)
 
 v = IntVar()

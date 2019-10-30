@@ -252,17 +252,37 @@ def draw_armor_compass(compass, distance):
         exit_system()
         #generate_pdf()
 
+def print_noise_analysis(noise_analysis):
+
+    if(noise_analysis == 40):
+        title_x = 630 - (2 * 10)
+        pyg.font.init()
+        my_font = pyg.font.SysFont('Calibri', 50)
+        text_surface = my_font.render('Toque!', False, (0, 0, 0))
+        screen.blit(text_surface,(title_x - 50,25))
+        time.sleep(1)
+        #pyg.display.flip()
+        screen.fill((255, 255, 255))
+    else:
+        title_x = 630 - (2 * 10)
+        pyg.font.init()
+        my_font = pyg.font.SysFont('Calibri', 50)
+        text_surface = my_font.render('Analisando Microfone...', False, (0, 0, 0))
+        screen.blit(text_surface, (title_x - 210,25))
+        pyg.display.flip()
+        screen.fill((255, 255, 255))
+
 def count_down():
     i = 5
-    while i > 0:
+    while i >= 0:
 
-        time.sleep(1)
+
         title_x = 630 - (2 * 10)
         pyg.font.init() # you have to call this at the start,
                         # if you want to use this module.
         my_font = pyg.font.SysFont('Calibri', 50)
         #my_font.set_bold(True)
-        if(i == 1):
+        if(i == 0):
             text_surface = my_font.render('Toque!', False, (0, 0, 0))
             screen.blit(text_surface,(title_x - 50,25))
         else:
@@ -271,6 +291,7 @@ def count_down():
         #update image
         pyg.display.flip()
         #update image
+        time.sleep(1)
         screen.fill((255,255,255))
         i -= 1
 

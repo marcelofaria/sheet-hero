@@ -4,7 +4,6 @@ import pygame as pyg
 import sheet_draw as sd
 import media as m
 import time
-import sys
 
 def confirmation_box():
     root = Tk()
@@ -112,3 +111,30 @@ def confirmation_box():
     root.button.pack()
 
     root.mainloop()
+
+def noise_mic():
+    r = Tk()
+    r.title('Noisy Room')
+    r.iconbitmap(m.ico)
+    r.geometry('450x140+475+250')
+
+    r.A = Frame(r)
+    r.A.pack(side = TOP, pady = 10)
+
+    r.B = Frame(r)
+    r.B.pack(side = BOTTOM, pady = 10)
+
+    r.msg = Label(r.A, text = 'O microfone está captando muito ruido')
+    r.msg.pack()
+
+    r.msg = Label(r.A, text = 'A sessão será encerrada')
+    r.msg.pack()
+
+    def exit_window():
+        exit()
+
+    r.b = Button(r.B, text = 'Ok', command = exit_window)
+    r.b.pack()
+
+    r.mainloop()
+

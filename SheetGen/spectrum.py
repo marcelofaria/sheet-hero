@@ -7,15 +7,15 @@ from tkinter import TclError    #trabalha com exceptions
 import rules                    #meu módulo para definir notas e tempos
 import sheet_draw as sd         #meu módulo para imprimir a partitura
 import time                     #calcula o tempo das notas
-import pygame as pyg
+import confirmation_box as cb   #
+import pygame as pyg            #
 
 def sheet_hero(compass, clef, tempo, title):
     #------------------- VARIABLES DECLARATION -------------------#
-
     #frames per buffer
-    #the bigger the multiplier, the bigger the note grasp accuracy
+    #the bigger the multiplier, the bigger the note accuracy
     #however, for reason of this performance loss, the note time accuracy decreases
-    CHUNK    = 1024 * 10 #10 is ideal
+    CHUNK    = 1024 * 1 #10 is ideal
     #quantity of bytes per sample
     FORMAT   = pyaudio.paInt16
     #mono or estereo
@@ -75,6 +75,9 @@ def sheet_hero(compass, clef, tempo, title):
     note_y            = 0           #
     pentagram_control = 1           #
     nomenclature      = ''          #
+    noise_analysis    = 0           #
+    noise_score       = 0
+    one_time_var      = 0
     #------------------- VARIABLES DECLARATION -------------------#
 
     #-------------------     MAIN LOOP      -------------------#
@@ -175,13 +178,30 @@ def sheet_hero(compass, clef, tempo, title):
         #--- IMPRIME O NOME E O SÍMBOLO DA NOTA TOCADA ---#
         note = rules.define_note(splitedX[maxX])
 
-        sd.draw_sheet()
-        #sd.generate_pdf()
-        distance = sd.draw_armor_clef(clef)
-        sd.draw_armor_compass(compass, distance)
-        sd.draw_tempo(tempo, compass)
-        sd.draw_title(title)
-        sd.exit_system()
+        if(noise_analysis <= 40):
+            sd.print_noise_analysis(noise_analysis)
+            if noise_analysis <= 2:
+                pass
+            elif total_time <= 0.25 and maxY >= 0.23 and (maxX <= 254 or maxX >= 959):
+                noise_score += 1
+                print('noise_score: ' + str(noise_score))
+            if noise_score == 41:
+                pyg.quit()
+                cb.noise_mic()
+
+            noise_analysis += 1
+            movement = 90
+        else:
+            if(one_time_var == 0):
+                sd.count_down()
+                one_time_var += 1
+            sd.draw_sheet()
+            #sd.generate_pdf()
+            distance = sd.draw_armor_clef(clef)
+            sd.draw_armor_compass(compass, distance)
+            sd.draw_tempo(tempo, compass)
+            sd.draw_title(title)
+            sd.exit_system()
 
         #note               : nota atual
         #previous_note      : nota anterior
@@ -206,7 +226,6 @@ def sheet_hero(compass, clef, tempo, title):
             if(total_time > 0.19 and total_time < 64):
                 position_y_sheet = rules.return_position_y(previous_note, pentagram_control)
 
-
                 if(maxY < 0.2):
                     nomenclature = 'pauses'
                     position_y_sheet = rules.return_position_y_pause(pentagram_control)
@@ -221,12 +240,12 @@ def sheet_hero(compass, clef, tempo, title):
 
                 if (position_y_sheet != -1):
                     note_symbol = rules.note_figure(float(total_time), movement, position_y_sheet, 0.05, nomenclature)
-                    print(clef)
+                    #print(clef)
                     if (clef == 3 or clef == 7) and nomenclature != 'pauses':
-                        print('clef 45 ou 65')
+                        #print('clef 45 ou 65')
                         if previous_note.find('#') != -1:
                             accidental = 'sharp'
-                            print('sharp')
+                            #print('sharp')
                             rules.sharps_and_flats(accidental, movement, position_y_sheet)
                     if(note_symbol != 0.75 and note_symbol != 0.5 and note_symbol != 0.25 and type(note_symbol) == float):
                         if(note_symbol != 'Fora do tempo'):
@@ -240,7 +259,7 @@ def sheet_hero(compass, clef, tempo, title):
                                 pentagram_control += 1
                         movement += 40
                     print(note, "%.2f" % (time_elapsed - time_start))
-                    print(note_symbol)
+                    #print(note_symbol)
             time_start = time_elapsed
 
         previous_note = note
@@ -249,12 +268,11 @@ def sheet_hero(compass, clef, tempo, title):
         #movement += movement
         #fig.close()
         #updates the figure
-        # try:
-        #
+        #try:
         #     fig.canvas.draw()
         #     fig.canvas.flush_events()
-        #     ann.remove() #erases the wave peak annotation
-        # except TclError:
+        #    ann.remove() #erases the wave peak annotation
+        #except TclError:
         #     break
 
     #-------------------     MAIN LOOP      -------------------#

@@ -40,7 +40,7 @@ sharp         = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\Sheet
 flat          = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\media\\bemol.png'          #path
 ligature      = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\media\\ligadura.png'       #path
 equal         = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\media\\=.png'              #path
-line          = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\media\\linha_longa.png'          #path
+line          = 'C:\\Users\\MarceloAugustoStefan\\Desktop\\TCC\\sheet-gen\\SheetGen\\media\\linha_longa.png'    #path
 #numeros
 
 #claves

@@ -118,7 +118,7 @@ def define_note(frequency_hz):
 def sharps_and_flats(sharp_or_flat, x, y):
     if sharp_or_flat == 'sharp':
         sd.draw_note_figure(m.sharp, x - 8, y + 25, False, 0.035)
-        print('dentro do sharp')
+        #print('dentro do sharp')
     elif sharp_or_flat == 'flat':
         sd.draw_note_figure(m.flat, x, y, False, 0.035)
     else:
@@ -380,3 +380,7 @@ def return_position_y(note, pentagram):
         return axis_y_pentagram
     else:
         return axis_y_pentagram
+
+def sum_tempo(value, previous_value):
+    sum_value = previous_value + value
+    return sum_value
